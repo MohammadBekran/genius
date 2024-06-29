@@ -23,8 +23,6 @@ const onError = (err: AxiosError<AxiosErrorMessage>) => {
     err.response.data.ErrorMessage.forEach((errorMessage) => {
       toast.error(errorMessage);
     });
-  } else {
-    toast.error("مشکل غیر منتظره ای رخ داد !");
   }
 
   if (err.response?.data.status === 401) {

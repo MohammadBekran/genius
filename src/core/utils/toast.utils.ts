@@ -13,7 +13,7 @@ const showSuccessToast = (message: string) => {
 };
 
 const showErrorToast = (message: string) => {
-  toast.success(message);
+  toast.error(message);
 };
 
 export { showLoadingToast, dismissToast, showSuccessToast, showErrorToast };

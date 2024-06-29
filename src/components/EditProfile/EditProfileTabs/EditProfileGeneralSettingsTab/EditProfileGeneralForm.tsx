@@ -1,69 +1,48 @@
 import { Form, Formik } from "formik";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+
+import { useUpdateProfileInfo } from "../../../../hooks/user-panel/edit-profile/update-profile-info";
+import { useProfileInfo } from "../../../../hooks/user-panel/useProfileInfo";
 
 import { EDIT_PROFILE_GENERAL_FORM } from "../../../../core/data/edit-profile/edit-profile-general-form";
-import { getProfileInfoAPI } from "../../../../core/services/api/user-panel/get-profile-info.api";
-import { updateProfileInfoAPI } from "../../../../core/services/api/user-panel/update-profile-info.api";
+import { convertDateToPersian } from "../../../../core/utils/date-helper.utils";
 import { onFormData } from "../../../../core/utils/form-data-helper.utils";
 import { editProfileGeneralFormSchema } from "../../../../core/validations/edit-profile/edit-profile-general-form.validation";
-import { convertDateToPersian } from "../../../../core/utils/date-helper.utils";
 
 import { EditProfileGeneralFormInterface } from "../../../../types/edit-profile/edit-profile-general-form";
-import { ProfileInfoInterface } from "../../../../types/profile-info";
 
 import { FieldBox } from "../../../common/FieldBox";
 
 const EditProfileGeneralForm = () => {
-  const [profileInfo, setProfileInfo] = useState<ProfileInfoInterface>();
+  const { data: profileInfo } = useProfileInfo();
+  const updateProfileInfo = useUpdateProfileInfo();
 
   const formattedBirthday = convertDateToPersian(profileInfo?.birthDay!);
 
-  const onSubmit = async (values: EditProfileGeneralFormInterface) => {
-    const data = onFormData(values);
-
-    try {
-      const response = await toast.promise(updateProfileInfoAPI(data), {
-        pending: "در حال آپدیت اطلاعات ...",
-      });
-
-      if (response.success) {
-        toast.success("اطلاعات با موفقیت آپدیت شد ...");
-      } else {
-        toast.error(response.errors);
-      }
-    } catch (error) {
-      toast.error("مشکلی در آپدیت اطلاعات به وجود آمد ...");
-    }
+  const initialValues = {
+    fName: profileInfo?.fName || "",
+    lName: profileInfo?.lName || "",
+    nationalCode: profileInfo?.nationalCode || "",
+    email: profileInfo?.email || "",
+    birthDay: profileInfo?.birthDay || "",
+    phoneNumber: profileInfo?.phoneNumber || "",
+    userAbout: profileInfo?.userAbout || "",
+    homeAdderess: profileInfo?.homeAdderess || "",
+    linkdinProfile: profileInfo?.linkdinProfile || "",
+    telegramLink: profileInfo?.telegramLink || "",
+    receiveMessageEvent: profileInfo?.receiveMessageEvent!,
+    gender: profileInfo?.gender!,
   };
 
-  useEffect(() => {
-    const fetchProfileInfo = async () => {
-      const getProfileInfo = await getProfileInfoAPI();
+  const onSubmit = async (values: EditProfileGeneralFormInterface) => {
+    const profileInfo = onFormData(values);
 
-      setProfileInfo(getProfileInfo);
-    };
-
-    fetchProfileInfo();
-  }, []);
+    updateProfileInfo.mutate(profileInfo);
+  };
 
   return (
     <div className="w-full mt-12">
       <Formik
-        initialValues={{
-          FName: profileInfo?.fName || "",
-          LName: profileInfo?.lName || "",
-          NationalCode: profileInfo?.nationalCode || "",
-          email: profileInfo?.email || "",
-          BirthDay: profileInfo?.birthDay || "",
-          phoneNumber: profileInfo?.phoneNumber || "",
-          userAbout: profileInfo?.userAbout || "",
-          HomeAdderess: profileInfo?.homeAdderess || "",
-          LinkdinProfile: profileInfo?.linkdinProfile || "",
-          TelegramLink: profileInfo?.telegramLink || "",
-          ReceiveMessageEvent: profileInfo?.receiveMessageEvent!,
-          Gender: profileInfo?.gender!,
-        }}
+        initialValues={initialValues}
         enableReinitialize={true}
         validationSchema={editProfileGeneralFormSchema}
         onSubmit={onSubmit}
@@ -89,7 +68,10 @@ const EditProfileGeneralForm = () => {
                 />
               ))}
             </div>
-            <button type="submit" className="editProfileSubmitButton">
+            <button
+              type="submit"
+              className="editProfileSubmitButton mr-0 mt-2 lg:mt-1"
+            >
               ثبت اطلاعات
             </button>
           </Form>

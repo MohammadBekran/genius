@@ -30,8 +30,6 @@ const useDeleteFavoriteCourse = () => {
       queryClient.invalidateQueries({
         queryKey: ["courseDetails"],
       });
-
-      toast.success("دوره با موفقیت از علاقه مندی های شما حذف شد");
     },
     onError: () => {
       toast.error("مشکلی در حذف دوره از علاقه مندی های شما به وجود آمد !");

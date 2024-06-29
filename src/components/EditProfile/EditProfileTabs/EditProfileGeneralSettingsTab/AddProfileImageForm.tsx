@@ -1,18 +1,17 @@
-import { CameraAltOutlined } from "@mui/icons-material";
 import { ChangeEvent } from "react";
+import { CameraAltOutlined } from "@mui/icons-material";
 
 import { useAddProfileImage } from "../../../../hooks/user-panel/useAddProfileImage";
+import { useTimeOut } from "../../../../hooks/useTimeOut";
+
 import { useUserProfile } from "../../../../redux/user-profile";
 import { useSelectProfileImage } from "../../../../hooks/user-panel/useSelectProfileImage";
-import { useTimeOut } from "../../../../hooks/useTimeOut";
 
 const AddProfileImageForm = () => {
   const addProfileImage = useAddProfileImage();
   const userProfile = useUserProfile();
   const selectProfileImage = useSelectProfileImage();
   const timeOut = useTimeOut();
-
-  console.log(userProfile.userImage);
 
   const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const imageData = new FormData();

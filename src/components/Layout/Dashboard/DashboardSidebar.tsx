@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { useUserProfile } from "../../../redux/user-profile";
+import { useProfileInfo } from "../../../hooks/user-panel/useProfileInfo";
 
 import { DASHBOARD_MENU_ITEMS } from "../../../core/data/dashboard/dashboard-menu-items";
 import { removeItem } from "../../../core/services/common/storage.services";
@@ -11,7 +11,6 @@ import { isUserLoginChange } from "../../../redux/user-login";
 
 import { DarkModeButton } from "../../common/DarkModeButton";
 
-import avatarImage from "../../../assets/images/Dashboard/Avatars/avatar1.png";
 import dashboardLogo from "../../../assets/images/Dashboard/Icons/dashboard-logo.svg";
 import notificationIcon from "../../../assets/images/Dashboard/Icons/notification.svg";
 
@@ -19,7 +18,7 @@ const DashboardSidebar = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
 
-  const userProfile = useUserProfile();
+  const { data: userProfile } = useProfileInfo();
 
   const onLogout = () => {
     removeItem("token");
