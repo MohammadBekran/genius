@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 
-import { useUpdateProfileInfo } from "../../../../hooks/user-panel/edit-profile/update-profile-info";
+import { useUpdateProfileInfo } from "../../../../hooks/user-panel/edit-profile/useUpdateProfileInfo";
 import { useProfileInfo } from "../../../../hooks/user-panel/useProfileInfo";
 
 import { EDIT_PROFILE_GENERAL_FORM } from "../../../../core/data/edit-profile/edit-profile-general-form";

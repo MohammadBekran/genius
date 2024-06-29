@@ -1,10 +1,8 @@
 import { Form, Formik } from "formik";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
+import { useEditPassword } from "../../../../hooks/user-panel/edit-profile/useEditPassword";
 
 import { EDIT_PROFILE_EDIT_PASSWORD_FORM } from "../../../../core/data/edit-profile/edit-profile-edit-password-form";
-import { editPasswordAPI } from "../../../../core/services/api/edit-profile/edit-profile-edit-password";
-import { removeItem } from "../../../../core/services/common/storage.services";
 import { editProfileEditPasswordFormSchema } from "../../../../core/validations/edit-profile/edit-profile-edit-password-form.validation";
 
 import { EditProfileEditPasswordFormInterface } from "../../../../types/edit-profile/edit-profile-edit-password-form";
@@ -12,26 +10,15 @@ import { EditProfileEditPasswordFormInterface } from "../../../../types/edit-pro
 import { FieldBox } from "../../../common/FieldBox";
 
 const EditProfileEditPasswordForm = () => {
-  const navigate = useNavigate();
+  const editPassword = useEditPassword();
 
   const onSubmit = async (values: EditProfileEditPasswordFormInterface) => {
-    try {
-      const password = await toast.promise(
-        editPasswordAPI(values.oldPassword, values.newPassword),
-        {
-          pending: "درحال تغییر رمز عبور ...",
-        }
-      );
-      if (password.success) {
-        toast.success("رمز عبور شما با موفقیت تغییر پیدا کرد ...");
-        removeItem("token");
-        navigate("/login");
-      } else {
-        toast.error(password.message);
-      }
-    } catch (error) {
-      toast.error("مشکلی در فرایند ثبت اطلاعات به وجود آمد !");
-    }
+    const { newPassword, oldPassword } = values;
+
+    editPassword.mutate({
+      newPassword,
+      oldPassword,
+    });
   };
 
   return (

@@ -29,7 +29,7 @@ const useUpdateProfileInfo = () => {
         queryClient.invalidateQueries({
           queryKey: ["profileInfo"],
         });
-        showSuccessToast("اطلاعات پروفایل شما با موفقیت بروزرسانی شد !");
+        showSuccessToast("اطلاعات شما با موفقیت بروزرسانی شد !");
       } else {
         showErrorToast("مشکلی در بروزرسانی اطلاعات پروفایل شما به وجود آمد !");
       }

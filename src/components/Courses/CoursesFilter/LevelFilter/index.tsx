@@ -59,15 +59,16 @@ const LevelFilter = ({ setCourseLevel }: LevelFilterProps) => {
         isValueChanged={isValueChanged}
       />
       <RadioGroup name="courseLevelGroup">
-        {courseLevels?.map((level) => (
-          <FilterCheckbox
-            type="radio"
-            key={level.id}
-            label={level.levelName}
-            value={level.id}
-            onChange={handleCourseLevelChange}
-          />
-        ))}
+        {courseLevels &&
+          courseLevels?.map((level) => (
+            <FilterCheckbox
+              type="radio"
+              key={level.id}
+              label={level.levelName}
+              value={level.id}
+              onChange={handleCourseLevelChange}
+            />
+          ))}
       </RadioGroup>
     </FilterAccordion>
   );
