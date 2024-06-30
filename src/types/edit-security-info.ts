@@ -1,5 +1,5 @@
 export interface EditSecurityInfo {
-  twoStepAuth: boolean;
+  twoStepAuth: string | boolean;
   recoveryEmail: string;
   baseUrl: string;
 }

@@ -3,6 +3,8 @@ import { Form, Formik } from "formik";
 import { useEditSecurityInfo } from "../../../../hooks/user-panel/useEditSecurityInfo";
 import { useSecurityInfo } from "../../../../hooks/user-panel/useSecurityInfo";
 
+import { editProfileSecurityFormSchema } from "../../../../core/validations/edit-profile/edit-profile-security-form.validation";
+
 import { EditSecurityInfo } from "../../../../types/edit-security-info";
 
 import { FieldBox } from "../../../common/FieldBox";
@@ -12,7 +14,7 @@ const EditProfileSecurityForm = () => {
   const editSecurityInfo = useEditSecurityInfo();
 
   const onSubmit = (e: EditSecurityInfo) => {
-    const checkTwoStepAuth = e.twoStepAuth == "true" ? true : false;
+    const checkTwoStepAuth = e.twoStepAuth === "true" ? true : false;
     editSecurityInfo.mutate({
       twoStepAuth: checkTwoStepAuth,
       recoveryEmail: e.recoveryEmail,
@@ -27,11 +29,12 @@ const EditProfileSecurityForm = () => {
         recoveryEmail: data?.recoveryEmail || "",
         baseUrl: data?.baseUrl || "",
       }}
+      validationSchema={editProfileSecurityFormSchema}
       enableReinitialize={true}
       onSubmit={onSubmit}
     >
       <Form>
-        <div className="flex items-center justify-center gap-6 mt-4">
+        <div className="flex justify-center gap-6 mt-4">
           <FieldBox
             label="ایمیل بازگردانی"
             id="recoveryEmail"
@@ -67,7 +70,7 @@ const EditProfileSecurityForm = () => {
             ]}
           />
         </div>
-        <button type="submit" className="editProfileSubmitButton mr-6 mt-5">
+        <button type="submit" className="editProfileSubmitButton mr-5 mt-3">
           ویرایش اطلاعات
         </button>
       </Form>
