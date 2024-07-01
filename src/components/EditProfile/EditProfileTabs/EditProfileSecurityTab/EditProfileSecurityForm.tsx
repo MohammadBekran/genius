@@ -8,17 +8,28 @@ import { editProfileSecurityFormSchema } from "../../../../core/validations/edit
 import { EditSecurityInfo } from "../../../../types/edit-security-info";
 
 import { FieldBox } from "../../../common/FieldBox";
+import { useEffect, useState } from "react";
 
 const EditProfileSecurityForm = () => {
+  const [twoStepVerificationValue, setTwoStepVerificationValue] =
+    useState<string>("false");
+
   const { data } = useSecurityInfo();
   const editSecurityInfo = useEditSecurityInfo();
 
+  useEffect(() => {
+    if (data) {
+      setTwoStepVerificationValue(data.twoStepAuth ? "true" : "false");
+    }
+  }, [data]);
+
   const onSubmit = (e: EditSecurityInfo) => {
-    const checkTwoStepAuth = e.twoStepAuth === "true" ? true : false;
+    const { recoveryEmail, baseUrl } = e;
+
     editSecurityInfo.mutate({
-      twoStepAuth: checkTwoStepAuth,
-      recoveryEmail: e.recoveryEmail,
-      baseUrl: e.baseUrl,
+      twoStepAuth: twoStepVerificationValue === "true" ? true : false,
+      recoveryEmail,
+      baseUrl,
     });
   };
 
@@ -55,19 +66,24 @@ const EditProfileSecurityForm = () => {
             label="تایید دو مرحله ای"
             name="twoStepAuth"
             id="twoStepAuth"
-            as="select"
             wrapperClassName="editProfileGenderAndReceiveMessageEventSelectBoxWrapper"
-            className="editProfileGenderAndReceiveMessageEventSelectBox"
-            options={[
-              {
-                value: true,
-                label: "فعال",
-              },
-              {
-                value: false,
-                label: "غیر فعال",
-              },
-            ]}
+            render={({ field, setFieldValue }) => (
+              <select
+                {...field}
+                className="editProfileGenderAndReceiveMessageEventSelectBox"
+                value={twoStepVerificationValue}
+                onChange={(e) => {
+                  setTwoStepVerificationValue(e.target.value);
+                  setFieldValue(
+                    "twoStepAuth",
+                    e.target.value === "true" ? true : false
+                  );
+                }}
+              >
+                <option value="true">فعال</option>
+                <option value="false">غیر فعال</option>
+              </select>
+            )}
           />
         </div>
         <button type="submit" className="editProfileSubmitButton mr-5 mt-3">

@@ -24,6 +24,7 @@ const FieldBox = ({
   setFieldValue,
   dateValue,
   options,
+  render,
 }: FieldBoxProps) => {
   const datePickerOnChange = (e: any) => {
     const date = e.day + "/" + e.month + "/" + e.year;
@@ -81,6 +82,7 @@ const FieldBox = ({
                   as={as}
                   select={as == "select" ? true : false}
                   options={options!}
+                  render={render}
                 />
               </div>
             </div>

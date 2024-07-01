@@ -22,6 +22,7 @@ const Field = ({
       id={id}
       placeholder={placeholder}
       className={className}
+      defaultOption={"false"}
       multiple={multiple}
       render={render}
     >

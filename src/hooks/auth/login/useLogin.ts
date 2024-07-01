@@ -7,7 +7,6 @@ import { isUserLoginChange } from "../../../redux/user-login";
 import { setItem } from "../../../core/services/common/storage.services";
 import http from "../../../core/services/interceptor";
 
-import { isTwoStepAuthChange } from "../../../redux/isTwoStepAuth";
 import { UserDataInterface } from "../../../types/login/user-data";
 
 const useLogin = () => {

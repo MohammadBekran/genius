@@ -12,11 +12,6 @@ import { useSelectProfileImage } from "../../../../hooks/user-panel/useSelectPro
 
 import { UserProfileImage } from "../../../../types/user-profile-image";
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
     children: ReactElement<any, any>;
@@ -154,4 +149,3 @@ const ProfileImageDialog = ({
 };
 
 export { ProfileImageDialog };
-

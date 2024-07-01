@@ -9,7 +9,7 @@ interface PasswordFieldProps {
   id: string;
   placeholder: string;
   isLogin?: boolean;
-  className: string;
+  className?: string;
 }
 
 const PasswordField = ({

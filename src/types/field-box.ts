@@ -1,4 +1,8 @@
-import { FormikErrors } from "formik";
+import {
+  FormikErrors,
+  FieldProps as FormikFieldProps,
+  FormikProps,
+} from "formik";
 
 import { EditProfileGeneralFormInterface } from "./edit-profile/edit-profile-general-form";
 
@@ -8,7 +12,7 @@ export interface FieldBoxProps {
   as?: string | undefined;
   name: string;
   id: string;
-  className: string;
+  className?: string;
   wrapperClassName?: string;
   isPassword?: boolean;
   placeholder?: string;
@@ -22,4 +26,5 @@ export interface FieldBoxProps {
   ) => Promise<void | FormikErrors<EditProfileGeneralFormInterface>>;
   dateValue?: string;
   options?: { value: boolean; label: string }[];
+  render?: (props: FormikFieldProps & FormikProps<any>) => JSX.Element | null;
 }

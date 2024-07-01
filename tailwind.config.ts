@@ -30,6 +30,7 @@ export default {
         landingServicesBox: "rgb(36 42 56 / 1)",
         profileImageModalBackground: "rgba(82, 82, 82, 0.7)",
         profileImageModalCloseButton: "#B9B9B9",
+        twoStepVerificationCloseButton: "#F1F7FF",
       },
       backgroundImage: {
         headerBg: "url('/src/assets/images/Header/header-bg.png')",
