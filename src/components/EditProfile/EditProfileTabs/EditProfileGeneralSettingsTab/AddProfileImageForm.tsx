@@ -1,48 +1,40 @@
-import { ChangeEvent } from "react";
+import { useState } from "react";
 import { CameraAltOutlined } from "@mui/icons-material";
 
-import { useAddProfileImage } from "../../../../hooks/user-panel/useAddProfileImage";
-import { useTimeOut } from "../../../../hooks/useTimeOut";
+import { UserProfileImage } from "../../../../types/user-profile-image";
 
-import { useUserProfile } from "../../../../redux/user-profile";
-import { useSelectProfileImage } from "../../../../hooks/user-panel/useSelectProfileImage";
+import { ProfileImageDialog } from "./ProfileImageDialog";
 
-const AddProfileImageForm = () => {
-  const addProfileImage = useAddProfileImage();
-  const userProfile = useUserProfile();
-  const selectProfileImage = useSelectProfileImage();
-  const timeOut = useTimeOut();
+interface AddProfileImageFormProps {
+  currentPictureAddress: string | undefined;
+  userImage: UserProfileImage[] | undefined;
+}
 
-  const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const imageData = new FormData();
+const AddProfileImageForm = ({
+  currentPictureAddress,
+  userImage,
+}: AddProfileImageFormProps) => {
+  const [open, setOpen] = useState(false);
 
-    if (e.target.files) imageData.append("formFile", e.target.files[0]);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    addProfileImage.mutate(imageData);
-
-    timeOut(() => {
-      const profileImageFormData = new FormData();
-
-      profileImageFormData.append(
-        "imageId",
-        userProfile.userImage[userProfile.userImage.length - 1].id
-      );
-
-      selectProfileImage.mutate(profileImageFormData);
-    }, 2000);
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
     <>
-      <input
-        type="file"
-        id="image"
-        onChange={handleFileInputChange}
-        className="hidden"
-      />
-      <label htmlFor="image">
+      <div onClick={handleClickOpen}>
         <CameraAltOutlined className="text-white" />
-      </label>
+      </div>
+      <ProfileImageDialog
+        open={open}
+        handleClose={handleClose}
+        currentPictureAddress={currentPictureAddress}
+        userImage={userImage}
+      />
     </>
   );
 };

@@ -28,6 +28,8 @@ export default {
         dashboardTitleBox: "#ECEFF1",
         dashboardDarkMode: "#FFFFFF33",
         landingServicesBox: "rgb(36 42 56 / 1)",
+        profileImageModalBackground: "rgba(82, 82, 82, 0.7)",
+        profileImageModalCloseButton: "#B9B9B9",
       },
       backgroundImage: {
         headerBg: "url('/src/assets/images/Header/header-bg.png')",
@@ -92,6 +94,7 @@ export default {
         courseDetailsHeroSectionSearchBoxShadow: "0px 0px 20px 0px #0000000D",
         newsSortActiveTabShadow: "0px 0px 20px 0px #0000001A",
         dashboardNotificationHomeShadow: "0px 0px 20px 0px #0000000D",
+        profileImageModalShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
       },
       borderColor: {
         filterAccordionBorder: "#ECEFF1",

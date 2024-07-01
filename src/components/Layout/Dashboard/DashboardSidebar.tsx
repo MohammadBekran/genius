@@ -13,6 +13,7 @@ import { DarkModeButton } from "../../common/DarkModeButton";
 
 import dashboardLogo from "../../../assets/images/Dashboard/Icons/dashboard-logo.svg";
 import notificationIcon from "../../../assets/images/Dashboard/Icons/notification.svg";
+import blankThumbnail from "../../../assets/images/Courses/blank-thumbnail.jpg";
 
 const DashboardSidebar = () => {
   const { pathname } = useLocation();
@@ -32,7 +33,11 @@ const DashboardSidebar = () => {
       <div className="dashboardSideBarTopSectionWrapper">
         <div className="dashboardSidebarUserInfoWrapper">
           <img
-            src={userProfile?.currentPictureAddress}
+            src={
+              userProfile?.currentPictureAddress !== "Not-set"
+                ? userProfile?.currentPictureAddress
+                : blankThumbnail
+            }
             className="dashboardSidebarAvatar"
           />
           <div className="mt-2">

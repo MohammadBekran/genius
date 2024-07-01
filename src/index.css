@@ -598,6 +598,18 @@
   .editProfileGenderAndReceiveMessageEventSelectBox {
     @apply editProfileFormInput appearance-none;
   }
+  .editProfileImageModalPaper {
+    @apply lg:!w-[916px] lg:h-[624px] flex justify-center items-center !bg-profileImageModalBackground backdrop-blur-[6.5px] shadow-profileImageModalShadow rounded-[10px] relative;
+  }
+  .editProfileImageModalCloseButton {
+    @apply bg-profileImageModalCloseButton rounded-full w-[26px] h-[26px] absolute top-2 right-2 cursor-pointer flex justify-center items-center;
+  }
+  .editProfileSelectDeleteImageCloseIconWrapper {
+    @apply bg-white dark:bg-gray-900 rounded-full w-[26px] h-[26px] cursor-pointer centerItem;
+  }
+  .editProfileSelectDeleteImageCloseIcon {
+    @apply w-[20px] h-[20px] !fill-red;
+  }
   /* Dashboard Courses */
   .dashboardCoursesSectionWrapper {
     @apply flex flex-col gap-4 mt-6;
@@ -690,6 +702,10 @@
   .courseItemStyleTwoDescriptionSkeleton {
     @apply lg:w-[380px] h-[7px] mt-2;
   }
+  /* Center Item */
+  .centerItem {
+    @apply flex justify-center items-center;
+  }
 }
 
 /* Swiper */
@@ -706,17 +722,25 @@
 .swiper-button-next::after {
   @apply hidden;
 }
+
 .swiper-pagination-bullet {
   @apply w-[20px] h-[20px] bg-center bg-[url('/src/assets/images/Landing/LandingTeachers/Icons/default-pagination.svg')];
 }
+
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   @apply bg-transparent bg-[url('/src/assets/images/Landing/LandingTeachers/Icons/active-pagination.svg')];
 }
+
 .swiper-pagination {
   @apply gap-3 flex justify-center;
 }
+
 .swiper-wrapper {
   @apply mb-12;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  @apply bg-transparent bg-[url('/src/assets/images/Landing/LandingTeachers/Icons/active-pagination.svg')];
 }
 
 /* Material UI */

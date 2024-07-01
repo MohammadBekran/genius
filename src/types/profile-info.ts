@@ -2,7 +2,8 @@ import { UserProfileImage } from "./user-profile-image";
 
 export interface ProfileInfoInterface {
   currentPictureAddress: string;
-  profileCompletionPercentage: UserProfileImage[];
+  profileCompletionPercentage: number;
+  userImage: UserProfileImage[];
   email: string;
   phoneNumber: string;
   lName: string;

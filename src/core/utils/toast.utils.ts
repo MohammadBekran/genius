@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { toast } from "../../components/common/toast";
 
 const showLoadingToast = (message: string, id: string) => {
   toast.loading(message, { toastId: id });
