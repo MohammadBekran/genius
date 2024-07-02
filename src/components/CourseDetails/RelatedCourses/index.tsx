@@ -1,9 +1,9 @@
-import { toast } from "react-toastify";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
 
-import { useCourseTop } from "../../../hooks/course/useCourseTop";
+import { useCourseTop } from "../../../core/services/api/course/useCourseTop";
+import { showErrorToast } from "../../../core/utils/toast.utils";
 
 import { CourseItem } from "../../common/CourseItem";
 import { CourseItemSkeleton } from "../../common/CourseItemSkeleton";
@@ -17,7 +17,7 @@ import "swiper/css/pagination";
 const RelatedCourses = () => {
   const { data, isLoading, error } = useCourseTop(5);
 
-  if (error) toast.error("مشکلی در دریافت دوره های مشابه به وجود آمد !");
+  if (error) showErrorToast("مشکلی در دریافت دوره های مشابه به وجود آمد !");
 
   const courseItemSkeletons = [1, 2, 3, 4];
 
@@ -57,10 +57,7 @@ const RelatedCourses = () => {
                 key={course.courseId}
                 className="lg:!w-[296px] lg:h-[389px] mr-4 py-5 mb-6"
               >
-                <CourseItem
-                  course={course}
-                  isUserFavorite={course?.isUserFavorite}
-                />
+                <CourseItem course={course} />
               </SwiperSlide>
             ))}
         </Swiper>

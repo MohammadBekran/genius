@@ -1,22 +1,21 @@
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-
-import { useDislikeCourse } from "../../../hooks/course/useDislikeCourse";
-import { useLikeCourse } from "../../../hooks/course/useLikeCourse";
-import { useDeleteLikeNews } from "../../../hooks/news/useDeleteLikeNews";
-import { useNewsDislike } from "../../../hooks/news/useNewsDislike";
-import { useNewsLike } from "../../../hooks/news/useNewsLike";
-
-import { handleScroll } from "../../../core/utils/scroll-helper.utils";
 
 import { useDarkModeSelector } from "../../../redux/darkMode";
 import { useIsUserLogin } from "../../../redux/user-login";
+
+import { useDeleteCourseLike } from "../../../core/services/api/course/useDeleteCourseLike";
+import { useDislikeCourse } from "../../../core/services/api/course/useDislikeCourse";
+import { useLikeCourse } from "../../../core/services/api/course/useLikeCourse";
+import { useDeleteLikeNews } from "../../../core/services/api/news/useDeleteLikeNews";
+import { useNewsDislike } from "../../../core/services/api/news/useNewsDislike";
+import { useNewsLike } from "../../../core/services/api/news/useNewsLike";
+import { handleScroll } from "../../../core/utils/scroll-helper.utils";
+import { showErrorToast } from "../../../core/utils/toast.utils";
 
 import disLikeDarkIcon from "../../../assets/images/CourseDetails/Icons/dislike-dark.svg";
 import disLikeIcon from "../../../assets/images/CourseDetails/Icons/dislike.svg";
 import likeDarkIcon from "../../../assets/images/CourseDetails/Icons/like-dark.svg";
 import likeIcon from "../../../assets/images/CourseDetails/Icons/like.svg";
-import { useDeleteCourseLike } from "../../../hooks/course/useDeleteCourseLike";
 
 interface LikeDislikeProps {
   nameData: string;
@@ -52,38 +51,30 @@ const LikeDislike = ({
   const dislikeCourse = useDislikeCourse();
 
   const unAuthenticatedLikeDislikeAction = (data: string) => {
-    toast.error(`برای ${data} کردن باید وارد سایت شوید ...`);
+    showErrorToast(`برای ${data} کردن باید وارد سایت شوید ...`);
 
     handleScroll();
     navigate("/login");
   };
 
   const handleLike = () => {
-    try {
-      if (isUserLogin === true) {
-        if (isLike)
-          newsId
-            ? deleteNewsLike.mutate(likeId)
-            : deleteCourseLike.mutate(likeId);
-        else newsId ? likeNews.mutate(newsId) : likeCourse.mutate(courseId!);
-      } else unAuthenticatedLikeDislikeAction("لایک");
-    } catch (error) {
-      toast.error("مشکلی در لایک کردن به وجود آمد ...");
-    }
+    if (isUserLogin === true) {
+      if (isLike)
+        newsId
+          ? deleteNewsLike.mutate(likeId)
+          : deleteCourseLike.mutate(likeId);
+      else newsId ? likeNews.mutate(newsId) : likeCourse.mutate(courseId!);
+    } else unAuthenticatedLikeDislikeAction("لایک");
   };
 
   const handleDislike = async () => {
     if (isUserLogin === true) {
-      try {
-        if (isDislike)
-          newsId
-            ? deleteNewsLike.mutate(likeId)
-            : deleteCourseLike.mutate(likeId);
-        else
-          newsId ? dislikeNews.mutate(newsId) : dislikeCourse.mutate(courseId!);
-      } catch (error) {
-        toast.error("مشکلی در ثبت دیس لایک به وجود آمد !");
-      }
+      if (isDislike)
+        newsId
+          ? deleteNewsLike.mutate(likeId)
+          : deleteCourseLike.mutate(likeId);
+      else
+        newsId ? dislikeNews.mutate(newsId) : dislikeCourse.mutate(courseId!);
     } else {
       unAuthenticatedLikeDislikeAction("لایک");
     }

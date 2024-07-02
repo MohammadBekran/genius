@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 
-import { useMyCourses } from "../../hooks/user-panel/useMyCourses";
+import { useMyCourses } from "../../core/services/api/user-panel/useMyCourses";
+import { showErrorToast } from "../../core/utils/toast.utils";
 
 import { DashboardCourses } from "../common/DashboardCourses";
 import { DashboardCoursesSearchFilterBox } from "../common/DashboardCoursesSearchFilterBox";
@@ -20,7 +20,7 @@ const MyCourses = () => {
     query ? query : undefined
   );
 
-  if (error) toast.error("مشکلی در دریافت دوره ها به وجود آمد !");
+  if (error) showErrorToast("مشکلی در دریافت دوره ها به وجود آمد !");
 
   return (
     <div>

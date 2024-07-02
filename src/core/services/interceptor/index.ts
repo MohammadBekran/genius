@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
-import { toast } from "react-toastify";
 
+import { showErrorToast } from "../../utils/toast.utils";
 import { getItem, removeItem } from "../common/storage.services";
 
 interface AxiosErrorMessage {
@@ -20,9 +20,9 @@ const onSuccess = (response: AxiosResponse) => {
 
 const onError = (err: AxiosError<AxiosErrorMessage>) => {
   if (err.response?.data.ErrorMessage) {
-    err.response.data.ErrorMessage.forEach((errorMessage) => {
-      toast.error(errorMessage);
-    });
+    err.response.data.ErrorMessage.forEach((errorMessage) =>
+      showErrorToast(errorMessage)
+    );
   }
 
   if (err.response?.data.status === 401) {

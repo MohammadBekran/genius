@@ -1,8 +1,6 @@
-import { toast } from "react-toastify";
-
-import { useNews } from "../../../hooks/news/useNews";
-
+import { useNews } from "../../../core/services/api/news/useNews";
 import { convertDateToPersian } from "../../../core/utils/date-helper.utils";
+import { showErrorToast } from "../../../core/utils/toast.utils";
 
 import { NewsItemSkeleton } from "../../common/NewsItemSkeleton";
 import { LandingNewsItem } from "./LandingNewsItem";
@@ -18,7 +16,7 @@ const LandingNewsItemsMapped = () => {
     undefined
   );
 
-  if (error) toast.error("مشکلی در دریافت اخبار به وجود آمد !");
+  if (error) showErrorToast("مشکلی در دریافت اخبار به وجود آمد !");
 
   const firstNews = data?.news[0];
   const otherNews = data?.news.slice(1, 4);
@@ -49,7 +47,7 @@ const LandingNewsItemsMapped = () => {
             <NewsItemStyleTwo
               id={firstNews?.id!}
               image={firstNews?.currentImageAddressTumb!}
-              allSeas={firstNews?.totalCount!}
+              allSeas={firstNews?.currentView!}
               createdAt={convertDateToPersian(firstNews?.updateDate!)}
               title={firstNews?.title!}
               description={firstNews?.miniDescribe!}

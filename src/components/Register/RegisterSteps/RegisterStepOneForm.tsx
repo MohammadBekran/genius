@@ -1,15 +1,14 @@
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { Form } from "react-router-dom";
-import { toast } from "react-toastify";
-
-import { sendVerificationMessageAPI } from "../../../core/services/api/auth/register/send-verification-message.api";
-import { registerStepOneFormSchema } from "../../../core/validations/register/register-step-one-form.validation";
 
 import {
   onPhoneNumberChange,
   useRegisterSelector,
 } from "../../../redux/register";
+
+import { useSendVerification } from "../../../core/services/api/auth/register/useSendVerification";
+import { registerStepOneFormSchema } from "../../../core/validations/register/register-step-one-form.validation";
 
 import { FieldBox } from "../../common/FieldBox";
 import { Link } from "../../common/Link";
@@ -20,27 +19,17 @@ interface RegisterStepOneFormProps {
 
 const RegisterStepOneForm = ({ setCurrentValue }: RegisterStepOneFormProps) => {
   const dispatch = useDispatch();
+  const sendVerification = useSendVerification();
   const { phoneNumber } = useRegisterSelector();
 
   const onSubmit = async (values: { phoneNumber: string }) => {
     const { phoneNumber } = values;
 
-    try {
-      dispatch(onPhoneNumberChange(phoneNumber));
-
-      const sendVerificationMessage = await toast.promise(
-        sendVerificationMessageAPI(phoneNumber),
-        {
-          pending: "کد تایید در حال ارسال است ...",
-        }
-      );
-      if (sendVerificationMessage.success) {
-        toast.success("کد تایید با موفقیت ارسال شد !");
-        setCurrentValue(2);
-      } else toast.error(sendVerificationMessage.message);
-    } catch (error) {
-      toast.error("مشکلی در ارسال کد تایید به وجود آمد !");
-    }
+    dispatch(onPhoneNumberChange(phoneNumber));
+    sendVerification.mutate(phoneNumber, {
+      onSuccess: (data) =>
+        data.message !== "درخواست نامعتبر" && setCurrentValue(2),
+    });
   };
 
   return (
@@ -63,6 +52,7 @@ const RegisterStepOneForm = ({ setCurrentValue }: RegisterStepOneFormProps) => {
                 id="phoneNumber"
                 placeholder="شماره موبایل"
                 className="authInput"
+                errorMessageWrapperMargin={false}
               />
               <div className="registerStepOneSubmitButtonWrapper">
                 <button

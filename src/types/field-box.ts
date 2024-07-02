@@ -27,4 +27,5 @@ export interface FieldBoxProps {
   dateValue?: string;
   options?: { value: boolean; label: string }[];
   render?: (props: FormikFieldProps & FormikProps<any>) => JSX.Element | null;
+  errorMessageWrapperMargin?: boolean;
 }

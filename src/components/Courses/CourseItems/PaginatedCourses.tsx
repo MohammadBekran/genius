@@ -31,8 +31,6 @@ const PaginatedCourses = ({
     setCurrentPage(event.selected);
   };
 
-  console.log(courses);
-
   return (
     <div className="paginatedCoursesWrapper">
       <div className="paginatedCourses">

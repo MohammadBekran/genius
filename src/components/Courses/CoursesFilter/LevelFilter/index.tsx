@@ -1,19 +1,10 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
-import { getAllCourseLevelAPI } from "../../../../core/services/api/course/get-all-course-level.api";
-
-import { CourseLevelsInterface } from "../../../../types/course-levels";
+import { useCourseLevel } from "../../../../core/services/api/course/useCourseLevel";
 
 import { DeleteFilterState } from "../../../common/DeleteFilterState";
 import { FilterCheckbox } from "../../../common/FilterCheckbox";
 import { RadioGroup } from "../../../common/RadioGroup";
-import { toast } from "../../../common/toast";
 import { FilterAccordion } from "../FilterAccordion";
 
 interface LevelFilterProps {
@@ -21,14 +12,11 @@ interface LevelFilterProps {
 }
 
 const LevelFilter = ({ setCourseLevel }: LevelFilterProps) => {
-  const [courseLevels, setCourseLevels] = useState<CourseLevelsInterface[]>();
   const [isValueChanged, setIsValueChanged] = useState<boolean>(false);
-  const [refetch, setRefetch] = useState<boolean>(false);
+
+  const { data: courseLevels } = useCourseLevel();
 
   const handleDeleteValueChange = () => {
-    setCourseLevel(undefined);
-    setCourseLevels([]);
-    setRefetch((prev) => !prev);
     setIsValueChanged(false);
   };
 
@@ -37,20 +25,6 @@ const LevelFilter = ({ setCourseLevel }: LevelFilterProps) => {
 
     setIsValueChanged(true);
   };
-
-  useEffect(() => {
-    const fetchCourseLevels = async () => {
-      try {
-        const getCourseLevels = await getAllCourseLevelAPI();
-
-        setCourseLevels(getCourseLevels);
-      } catch (error) {
-        toast.error("مشکلی در دریافت سطوح دوره ها به وجود آمد !");
-      }
-    };
-
-    fetchCourseLevels();
-  }, [refetch]);
 
   return (
     <FilterAccordion title="سطح دوره" isOpen>

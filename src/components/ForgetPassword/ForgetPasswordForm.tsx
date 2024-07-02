@@ -1,22 +1,20 @@
 import { Form, Formik } from "formik";
-import { toast } from "react-toastify";
 
-import { sendEmailAPI } from "../../core/services/api/auth/forget-password/send-email.api";
+import { useForgetPassword } from "../../core/services/api/auth/forget-password/useForgetPassword";
 import { forgetPasswordStepOneFormSchema } from "../../core/validations/forget-password/forget-password-step-one-form";
 
 import { FieldBox } from "../common/FieldBox";
 
 const ForgetPasswordForm = () => {
-  const onSubmit = async (values: { email: string }) => {
-    const sendEmail = await toast.promise(
-      sendEmailAPI(values.email, "http://localhost:5173/reset-password"),
-      {
-        pending: "در حال بررسی ایمیل ...",
-      }
-    );
+  const forgetPassword = useForgetPassword();
 
-    if (sendEmail.success) toast.success("ایمیل با موفقیت ارسال شد !");
-    else toast.error(sendEmail.errors[0]);
+  const onSubmit = async (values: { email: string }) => {
+    const { email } = values;
+
+    forgetPassword.mutate({
+      email,
+      baseUrl: "http://localhost:5173/reset-password",
+    });
   };
 
   return (
@@ -26,7 +24,7 @@ const ForgetPasswordForm = () => {
         onSubmit={onSubmit}
         validationSchema={forgetPasswordStepOneFormSchema}
       >
-        {({ values, handleSubmit }) => (
+        {({ values }) => (
           <Form>
             <div className="forgetPasswordStepOneFieldWrapper">
               <FieldBox
@@ -36,6 +34,7 @@ const ForgetPasswordForm = () => {
                 id="email"
                 placeholder="ایمیل"
                 className="authInput"
+                errorMessageWrapperMargin={false}
               />
               <button
                 type="submit"

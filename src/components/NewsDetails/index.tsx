@@ -1,18 +1,17 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { SyntheticEvent } from "react";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 
-import { useAddNewsComment } from "../../hooks/news/comments/useAddNewsComment";
-import { useNewsById } from "../../hooks/news/useNewsById";
-import { useNewsRate } from "../../hooks/news/useNewsRate";
-
+import { useAddNewsComment } from "../../core/services/api/news/comments/useAddNewsComment";
+import { useNewsComments } from "../../core/services/api/news/comments/useNewsComments";
+import { useNewsById } from "../../core/services/api/news/useNewsById";
+import { useNewsRate } from "../../core/services/api/news/useNewsRate";
 import { loadDescribe } from "../../core/utils/load-describe.utils";
+import { showErrorToast } from "../../core/utils/toast.utils";
 import { commentFormSchema } from "../../core/validations/comment-form.validation";
 
 import { BlockInterface } from "../../types/block";
 
-import { useNewsComments } from "../../hooks/news/comments/useNewsComments";
 import { CommentForm } from "../common/CommentForm";
 import { Comments } from "../common/Comments";
 import { Satisfaction } from "../common/Satisfaction";
@@ -29,7 +28,7 @@ const NewsDetails = () => {
   const addNewsRate = useNewsRate();
   const addNewsComment = useAddNewsComment();
 
-  if (error) toast.error("مشکلی در دریافت خبر به وجود آمد !");
+  if (error) showErrorToast("مشکلی در دریافت خبر به وجود آمد !");
 
   let convertedDescribe: string | { blocks: BlockInterface[] };
 

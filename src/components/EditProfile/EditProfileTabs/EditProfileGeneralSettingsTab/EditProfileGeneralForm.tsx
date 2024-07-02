@@ -1,15 +1,13 @@
 import { Form, Formik } from "formik";
 
-import { useUpdateProfileInfo } from "../../../../hooks/user-panel/edit-profile/useUpdateProfileInfo";
-
 import { EDIT_PROFILE_GENERAL_FORM } from "../../../../core/data/edit-profile/edit-profile-general-form";
+import { useUpdateProfileInfo } from "../../../../core/services/api/user-panel/edit-profile/useUpdateProfileInfo";
 import { convertDateToPersian } from "../../../../core/utils/date-helper.utils";
 import { onFormData } from "../../../../core/utils/form-data-helper.utils";
 import { editProfileGeneralFormSchema } from "../../../../core/validations/edit-profile/edit-profile-general-form.validation";
 
-import { ProfileInfoInterface } from "../../../../types/profile-info";
-
 import { EditProfileGeneralFormInterface } from "../../../../types/edit-profile/edit-profile-general-form";
+import { ProfileInfoInterface } from "../../../../types/profile-info";
 
 import { FieldBox } from "../../../common/FieldBox";
 

@@ -1,20 +1,11 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
-import { getTeachersAPI } from "../../../../core/services/api/teacher/get-teachers.api";
-
-import { TeacherItemsInterface } from "../../../../types/teacher-items";
+import { useTeachers } from "../../../../core/services/api/teacher/useTeachers";
 
 import { DeleteFilterState } from "../../../common/DeleteFilterState";
 import { FilterCheckbox } from "../../../common/FilterCheckbox";
 import { RadioGroup } from "../../../common/RadioGroup";
 import { SearchBox } from "../../../common/SearchBox";
-import { toast } from "../../../common/toast";
 import { FilterAccordion } from "../FilterAccordion";
 
 interface TeacherFilterProps {
@@ -23,9 +14,10 @@ interface TeacherFilterProps {
 }
 
 const TeacherFilter = ({ setTeacherId, setQuery }: TeacherFilterProps) => {
-  const [teachers, setTeachers] = useState<TeacherItemsInterface[]>([]);
   const [isValueChanged, setIsValueChanged] = useState(false);
   const [isShowMoreTeachers, setIsShowMoreTeachers] = useState(false);
+
+  const { data: teachers } = useTeachers();
 
   const handleDeleteValueChange = () => {
     setTeacherId(undefined);
@@ -46,20 +38,6 @@ const TeacherFilter = ({ setTeacherId, setQuery }: TeacherFilterProps) => {
     else return teachers ? teachers?.slice(0, 5) : [];
   };
 
-  useEffect(() => {
-    const fetchTeachers = async () => {
-      try {
-        const getTeachers = await getTeachersAPI();
-
-        setTeachers(getTeachers);
-      } catch (error) {
-        toast.error("مشکلی در دریافت اساتید به وجود آمد !");
-      }
-    };
-
-    fetchTeachers();
-  }, []);
-
   return (
     <FilterAccordion title="اساتید دوره" isOpen>
       <DeleteFilterState
@@ -76,7 +54,7 @@ const TeacherFilter = ({ setTeacherId, setQuery }: TeacherFilterProps) => {
       </div>
       <RadioGroup name="teacherGroup">
         {renderTeachers() &&
-          renderTeachers().map((teacher) => (
+          renderTeachers()?.map((teacher) => (
             <FilterCheckbox
               key={teacher.teacherId}
               type="radio"

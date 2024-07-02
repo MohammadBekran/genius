@@ -6,9 +6,9 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { ChangeEvent, ReactElement, Ref, forwardRef } from "react";
 
-import { useDeleteProfileImage } from "../../../../hooks/user-panel/edit-profile/useDeleteProfileImage";
-import { useAddProfileImage } from "../../../../hooks/user-panel/useAddProfileImage";
-import { useSelectProfileImage } from "../../../../hooks/user-panel/useSelectProfileImage";
+import { useDeleteProfileImage } from "../../../../core/services/api/user-panel/edit-profile/useDeleteProfileImage";
+import { useAddProfileImage } from "../../../../core/services/api/user-panel/useAddProfileImage";
+import { useSelectProfileImage } from "../../../../core/services/api/user-panel/useSelectProfileImage";
 
 import { UserProfileImage } from "../../../../types/user-profile-image";
 

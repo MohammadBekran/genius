@@ -1,6 +1,5 @@
-import { toast } from "react-toastify";
-
-import { useCourseTop } from "../../../hooks/course/useCourseTop";
+import { useCourseTop } from "../../../core/services/api/course/useCourseTop";
+import { showErrorToast } from "../../../core/utils/toast.utils";
 
 import { CourseInterface } from "../../../types/course";
 
@@ -10,7 +9,7 @@ import { CourseItemSkeleton } from "../../common/CourseItemSkeleton";
 const LandingCoursesMapped = () => {
   const { data, isLoading, isError } = useCourseTop(4);
 
-  if (isError) toast.error("مشکلی در دریافت دوره های برتر به وجود آمد !");
+  if (isError) showErrorToast("مشکلی در دریافت دوره های برتر به وجود آمد !");
 
   return (
     <>

@@ -1,8 +1,7 @@
 import { Form, Formik } from "formik";
 
-import { useEditPassword } from "../../../../hooks/user-panel/edit-profile/useEditPassword";
-
 import { EDIT_PROFILE_EDIT_PASSWORD_FORM } from "../../../../core/data/edit-profile/edit-profile-edit-password-form";
+import { useEditPassword } from "../../../../core/services/api/user-panel/edit-profile/useEditPassword";
 import { editProfileEditPasswordFormSchema } from "../../../../core/validations/edit-profile/edit-profile-edit-password-form.validation";
 
 import { EditProfileEditPasswordFormInterface } from "../../../../types/edit-profile/edit-profile-edit-password-form";

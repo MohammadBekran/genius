@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 
-import { useNews } from "../../hooks/news/useNews";
+import { useNews } from "../../core/services/api/news/useNews";
+import { showErrorToast } from "../../core/utils/toast.utils";
 
 import { NewsHeroSection } from "./NewsHeroSection";
 import { PaginatedNews } from "./NewsItems/PaginatedNews";
@@ -22,7 +22,7 @@ const News = () => {
     undefined
   );
 
-  if (error) toast.error("مشکلی در دریافت اخبار به وجود آمد !");
+  if (error) showErrorToast("مشکلی در دریافت اخبار به وجود آمد !");
 
   return (
     <div className="w-[95%] mx-auto">

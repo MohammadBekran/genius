@@ -2,14 +2,13 @@ import { Field, Formik } from "formik";
 import AuthCode from "react-auth-code-input";
 import { useDispatch } from "react-redux";
 import { Form } from "react-router-dom";
-import { toast } from "react-toastify";
-
-import { verifyMessageAPI } from "../../../core/services/api/auth/register/verify-message.api";
 
 import {
   onVerifyCodeChange,
   useRegisterSelector,
 } from "../../../redux/register";
+
+import { useVerifyMessage } from "../../../core/services/api/auth/register/useVerifyMessage";
 
 import { ErrorMessage } from "../../common/ErrorMessage";
 
@@ -20,23 +19,19 @@ interface RegisterStepTwoFormProps {
 const RegisterStepTwoForm = ({ setCurrentValue }: RegisterStepTwoFormProps) => {
   const dispatch = useDispatch();
   const { phoneNumber, verifyCode: registerVerifyCode } = useRegisterSelector();
+  const verifyMessage = useVerifyMessage();
 
   const onSubmit = async (values: { verifyCode: string }) => {
-    try {
-      dispatch(onVerifyCodeChange(values.verifyCode));
-      const verifyCode = await toast.promise(
-        verifyMessageAPI(phoneNumber, registerVerifyCode),
-        {
-          pending: "کد تایید در حال بررسی می باشد ...",
-        }
-      );
-      if (verifyCode.success) {
-        toast.success("کد تایید شما با موفقیت تایید شد !");
-        setCurrentValue(3);
-      } else toast.error(verifyCode.message);
-    } catch (error) {
-      toast.error("مشکلی در بررسی کد تایید پیش آمد !");
-    }
+    dispatch(onVerifyCodeChange(values.verifyCode));
+    verifyMessage.mutate(
+      {
+        phoneNumber,
+        verifyCode: registerVerifyCode,
+      },
+      {
+        onSuccess: () => setCurrentValue(3),
+      }
+    );
   };
 
   return (
@@ -71,7 +66,10 @@ const RegisterStepTwoForm = ({ setCurrentValue }: RegisterStepTwoFormProps) => {
                   />
                 )}
               />
-              <ErrorMessage name="verifyCode" />
+              <ErrorMessage
+                name="verifyCode"
+                errorMessageWrapperMargin={false}
+              />
             </div>
             <span className="authSendVerificationCodeTime">1:34</span>
             <div className="registerStepTwoThreeSubmitButtonWrapper">

@@ -1,4 +1,4 @@
-import { useProfileInfo } from "../../../../hooks/user-panel/useProfileInfo";
+import { useProfileInfo } from "../../../../core/services/api/user-panel/useProfileInfo";
 
 import { CustomTabPanel } from "../../../common/CustomTabPanel";
 import { AddProfileImageForm } from "./AddProfileImageForm";

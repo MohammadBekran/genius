@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 
-import useCourses from "../../hooks/course/useCourses";
+import { useCourses } from "../../core/services/api/course/useCourses";
+import { showErrorToast } from "../../core/utils/toast.utils";
 
 import { CoursesHeroSection } from "../Courses/CoursesHeroSection";
 import { PaginatedCourses } from "./CourseItems/PaginatedCourses";
@@ -22,8 +22,6 @@ const Courses = () => {
   const [costUp, setCostUp] = useState<number>();
   const [sortType, setSortType] = useState<string>();
 
-  console.log("Level", courseLevel);
-
   const { data, error, isLoading } = useCourses(
     currentPage,
     9,
@@ -41,7 +39,7 @@ const Courses = () => {
     teacherId
   );
 
-  if (error) toast.error("مشکلی در دریافت دوره ها به وجود آمد !");
+  if (error) showErrorToast("مشکلی در دریافت دوره ها به وجود آمد !");
 
   return (
     <>

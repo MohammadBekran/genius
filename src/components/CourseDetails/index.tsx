@@ -1,26 +1,29 @@
 import { Tooltip } from "@mui/material";
 import { SyntheticEvent } from "react";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
-
-import { convertDateToPersian } from "../../core/utils/date-helper.utils";
-import { priceWithCommas } from "../../core/utils/number-helper.utils";
-
-import { useCourseReserve } from "../../hooks/course/course-reserve/useCourseReserve";
-import { useDeleteCourseReserve } from "../../hooks/course/course-reserve/useDeleteCourseReserve";
-import { useCourseDetails } from "../../hooks/course/useCourseDetails";
-import { useCourseRating } from "../../hooks/course/useCourseRating";
-import { useTeacherDetails } from "../../hooks/teacher/useTeacherDetails";
 
 import { useDarkModeSelector } from "../../redux/darkMode";
 
+import { CurrentUserDislike } from "../../core/enums/CurrentUserDislike";
+import { CurrentUserLike } from "../../core/enums/CurrentUserLike.enums";
+import { IsCourseReserve } from "../../core/enums/IsCourseReserve.enums";
+import { IsCourseUser } from "../../core/enums/IsCourseUser.enums";
+import { useCourseReserve } from "../../core/services/api/course/course-reserve/useCourseReserve";
+import { useDeleteCourseReserve } from "../../core/services/api/course/course-reserve/useDeleteCourseReserve";
+import { useCourseDetails } from "../../core/services/api/course/useCourseDetails";
+import { useCourseRating } from "../../core/services/api/course/useCourseRating";
+import { useTeacherDetails } from "../../core/services/api/teacher/useTeacherDetails";
+import { convertDateToPersian } from "../../core/utils/date-helper.utils";
+import { priceWithCommas } from "../../core/utils/number-helper.utils";
+import { showErrorToast } from "../../core/utils/toast.utils";
+
 import { CourseLikeButton } from "../common/CourseLikeBox/CourseLikeButton";
 import { Satisfaction } from "../common/Satisfaction";
+import { Skeleton } from "../common/Skeleton";
 import { CourseDetailsInformationBox } from "./CourseDetailsInformation/CourseDetailsInformationBox";
 import { CourseTeacher } from "./CourseDetailsInformation/CourseTeacher";
 import { CourseTabs } from "./CourseTabs";
 import { RelatedCourses } from "./RelatedCourses";
-import { Skeleton } from "../common/Skeleton";
 
 import clockDarkIcon from "../../assets/images/CourseDetails/Icons/clock-dark2.svg";
 import clockIcon from "../../assets/images/CourseDetails/Icons/clock.svg";
@@ -57,10 +60,10 @@ const CourseDetails = () => {
   };
 
   const handleCourseReserve = () => {
-    if (course?.isCourseUser === "1") {
-      toast.error("شما دانشجوی دوره هستید و قادر به حذف رزرو نیستید !");
-    } else {
-      if (course?.isCourseReseve == "0")
+    if (course?.isCourseUser === IsCourseReserve.TRUE)
+      showErrorToast("شما دانشجوی دوره هستید و قادر به حذف رزرو نیستید !");
+    else {
+      if (course?.isCourseReseve === IsCourseReserve.FALSE)
         addCourseReserve.mutate(course?.courseId);
       else deleteCourseReserve.mutate(course?.courseReseveId!);
     }
@@ -139,8 +142,8 @@ const CourseDetails = () => {
             handleRateChange={handleRateChange}
             rateCount={course?.currentRate!}
             likeId={course?.userLikeId!}
-            isLike={course?.currentUserLike === "1"}
-            isDislike={course?.currentUserDissLike === "1"}
+            isLike={course?.currentUserLike === CurrentUserLike.TRUE}
+            isDislike={course?.currentUserDissLike === CurrentUserDislike.TRUE}
           />
           <CourseTabs description={course?.describe!} courseId={courseId!} />
         </div>
@@ -198,7 +201,7 @@ const CourseDetails = () => {
             <div className="flex justify-between items-center mt-6 w-[90%] mx-auto">
               <Tooltip
                 title={
-                  course?.isCourseUser === "1" &&
+                  course?.isCourseUser === IsCourseUser.TRUE &&
                   "شما دانشجوی دوره هستید و قادر به حذف رزرو نیستید !"
                 }
                 placement="top"
@@ -207,11 +210,11 @@ const CourseDetails = () => {
                 <button
                   className="bg-primary shadow-courseAddToCarButtonShadow text-white w-[40%] lg:w-[145px] h-[56px] rounded-[80px]"
                   onClick={handleCourseReserve}
-                  disabled={course?.isCourseUser === "1"}
+                  disabled={course?.isCourseUser === IsCourseUser.TRUE}
                 >
-                  {course?.isCourseUser === "1"
+                  {course?.isCourseUser === IsCourseUser.TRUE
                     ? "دانشجوی دوره"
-                    : course?.isCourseReseve === "0"
+                    : course?.isCourseReseve === IsCourseReserve.FALSE
                     ? "شرکت در دوره"
                     : "حذف رزرو"}
                 </button>
@@ -243,3 +246,4 @@ const CourseDetails = () => {
 };
 
 export { CourseDetails };
+

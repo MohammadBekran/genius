@@ -1,19 +1,10 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
-import { getCourseTypesAPI } from "../../../../core/services/api/course/get-course-types.api";
-
-import { CourseTypesInterface } from "../../../../types/course-types";
+import { useCourseTypes } from "../../../../core/services/api/course/useCourseTypes";
 
 import { DeleteFilterState } from "../../../common/DeleteFilterState";
 import { FilterCheckbox } from "../../../common/FilterCheckbox";
 import { RadioGroup } from "../../../common/RadioGroup";
-import { toast } from "../../../common/toast";
 import { FilterAccordion } from "../FilterAccordion";
 
 interface TypesFilterProps {
@@ -21,8 +12,9 @@ interface TypesFilterProps {
 }
 
 const TypesFilter = ({ setCourseTypeId }: TypesFilterProps) => {
-  const [courseTypes, setCourseTypes] = useState<CourseTypesInterface[]>();
-  const [isValueChanged, setIsValueChanged] = useState<boolean>(false);
+  const [isValueChanged, setIsValueChanged] = useState(false);
+
+  const { data: courseTypes } = useCourseTypes();
 
   const handleDeleteValueChange = () => {
     setCourseTypeId(undefined);
@@ -33,20 +25,6 @@ const TypesFilter = ({ setCourseTypeId }: TypesFilterProps) => {
     setCourseTypeId(+e.target.value);
     setIsValueChanged(true);
   };
-
-  useEffect(() => {
-    const fetchCourseTypes = async () => {
-      try {
-        const getCourseTypes = await getCourseTypesAPI();
-
-        setCourseTypes(getCourseTypes);
-      } catch (error) {
-        toast.error("مشکلی در دریافت تایپ دوره ها به وجود آمد !");
-      }
-    };
-
-    fetchCourseTypes();
-  }, []);
 
   return (
     <FilterAccordion title="تایپ دوره">

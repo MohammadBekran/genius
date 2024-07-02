@@ -1,14 +1,13 @@
 import { Form, Formik } from "formik";
+import { useEffect, useState } from "react";
 
-import { useEditSecurityInfo } from "../../../../hooks/user-panel/useEditSecurityInfo";
-import { useSecurityInfo } from "../../../../hooks/user-panel/useSecurityInfo";
-
+import { useEditSecurityInfo } from "../../../../core/services/api/user-panel/useEditSecurityInfo";
+import { useSecurityInfo } from "../../../../core/services/api/user-panel/useSecurityInfo";
 import { editProfileSecurityFormSchema } from "../../../../core/validations/edit-profile/edit-profile-security-form.validation";
 
 import { EditSecurityInfo } from "../../../../types/edit-security-info";
 
 import { FieldBox } from "../../../common/FieldBox";
-import { useEffect, useState } from "react";
 
 const EditProfileSecurityForm = () => {
   const [twoStepVerificationValue, setTwoStepVerificationValue] =

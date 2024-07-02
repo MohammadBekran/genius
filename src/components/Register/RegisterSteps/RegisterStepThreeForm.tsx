@@ -1,11 +1,10 @@
 import { Formik } from "formik";
-import { Form, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Form } from "react-router-dom";
 
 import { useRegisterSelector } from "../../../redux/register";
 
 import { REGISTER_STEP_THREE_FORM } from "../../../core/data/register/register-step-three-form";
-import { registerAPI } from "../../../core/services/api/auth/register/register.api";
+import { useRegister } from "../../../core/services/api/auth/register/useRegister";
 import { registerStepThreeFormSchema } from "../../../core/validations/register/register-step-three-form.validation-three";
 
 import { FieldBox } from "../../common/FieldBox";
@@ -17,30 +16,17 @@ interface RegisterStepThreeFormProps {
 const RegisterStepThreeForm = ({
   setCurrentValue,
 }: RegisterStepThreeFormProps) => {
-  const navigate = useNavigate();
-
   const { phoneNumber } = useRegisterSelector();
+  const registerUser = useRegister();
 
   const onSubmit = async (values: { password: string; gmail: string }) => {
-    try {
-      const { password, gmail } = values;
+    const { password, gmail } = values;
 
-      const registerUser = await toast.promise(
-        registerAPI(password, gmail, phoneNumber),
-        {
-          pending: "شما در حال ثبت نام می باشید ...",
-        }
-      );
-      if (registerUser.success) {
-        toast.success("شما با موفقیت ثبت نام شدید !");
-        navigate("/login");
-        toast.info("اکنون میتوانید در سایت وارد شوید !");
-      } else {
-        toast.error("مشکلی در فرایند ثبت نام به وجود آمد !");
-      }
-    } catch (error) {
-      toast.error("مشکلی در فرایند ثبت نام به وجود آمد !");
-    }
+    registerUser.mutate({
+      gmail,
+      password,
+      phoneNumber,
+    });
   };
 
   return (
@@ -67,6 +53,7 @@ const RegisterStepThreeForm = ({
                     placeholder={field.placeholder}
                     className={field.className}
                     isPassword={field.isPassword}
+                    errorMessageWrapperMargin={false}
                   />
                 ))}
                 <div className="registerStepTwoThreeSubmitButtonWrapper">

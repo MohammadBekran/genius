@@ -2,21 +2,20 @@ import { useDispatch } from "react-redux";
 
 import { onUserProfileChange } from "../../redux/user-profile";
 
-import { useCourseTop } from "../../hooks/course/useCourseTop";
-import { useMyCourses } from "../../hooks/user-panel/useMyCourses";
-import { useProfileInfo } from "../../hooks/user-panel/useProfileInfo";
-
+import { useCourseTop } from "../../core/services/api/course/useCourseTop";
+import { useMyCourses } from "../../core/services/api/user-panel/useMyCourses";
+import { useProfileInfo } from "../../core/services/api/user-panel/useProfileInfo";
 import { convertDateToPersian } from "../../core/utils/date-helper.utils";
 
 import { DashboardTitleBox } from "../common/DashboardTitleBox";
 import { Link } from "../common/Link";
 import { Skeleton } from "../common/Skeleton";
 import { DashboardCourseItem } from "./DashboardCourseItem";
+import { DashboardCourseItemSkeleton } from "./DashboardCourseItemSkeleton";
 import { DashboardInformationBox } from "./DashboardInformationBox";
 import { DashboardTitle } from "./DashboardTitle";
 
 import blankThumbnail from "../../assets/images/Courses/blank-thumbnail.jpg";
-import { DashboardCourseItemSkeleton } from "./DashboardCourseItemSkeleton";
 
 const Dashboard = () => {
   const dispatch = useDispatch();

@@ -1,13 +1,11 @@
-import { addCommentCourseAPI } from "../../../../core/services/api/course/comments/add-comment-course.api";
+import { useAddCourseComment } from "../../../../core/services/api/course/comments/useAddCourseComment";
+import { useCourseComments } from "../../../../core/services/api/course/comments/useCourseComments";
 import { onFormData } from "../../../../core/utils/form-data-helper.utils";
 import { commentFormSchema } from "../../../../core/validations/comment-form.validation";
-import { useAddCourseComment } from "../../../../hooks/course/comments/useAddCourseComment";
-import { useCourseComments } from "../../../../hooks/course/comments/useCourseComments";
 
 import { CommentForm } from "../../../common/CommentForm";
 import { Comments } from "../../../common/Comments";
 import { CustomTabPanel } from "../../../common/CustomTabPanel";
-import { toast } from "../../../common/toast";
 
 interface CourseDetailsCommentsTabProps {
   value: number;

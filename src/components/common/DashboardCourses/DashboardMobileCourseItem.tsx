@@ -3,7 +3,7 @@ import { Tooltip } from "@mui/material";
 
 import { useDarkModeSelector } from "../../../redux/darkMode";
 
-import { useDeleteCourseReserve } from "../../../hooks/course/course-reserve/useDeleteCourseReserve";
+import { useDeleteCourseReserve } from "../../../core/services/api/course/course-reserve/useDeleteCourseReserve";
 
 import { Link } from "../Link";
 

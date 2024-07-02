@@ -1,7 +1,7 @@
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 
-import { useAddCourseFavorite } from "../../../hooks/course/useAddCourseFavorite";
-import { useDeleteFavoriteCourse } from "../../../hooks/course/useDeleteFavoriteCourse";
+import { useAddCourseFavorite } from "../../../core/services/api/course/useAddCourseFavorite";
+import { useDeleteFavoriteCourse } from "../../../core/services/api/course/useDeleteFavoriteCourse";
 
 interface CourseLikeButtonProps {
   classes?: string;

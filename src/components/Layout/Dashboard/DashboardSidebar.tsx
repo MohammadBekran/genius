@@ -1,19 +1,18 @@
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
-
-import { useProfileInfo } from "../../../hooks/user-panel/useProfileInfo";
-
-import { DASHBOARD_MENU_ITEMS } from "../../../core/data/dashboard/dashboard-menu-items";
-import { removeItem } from "../../../core/services/common/storage.services";
 
 import { isUserLoginChange } from "../../../redux/user-login";
 
+import { DASHBOARD_MENU_ITEMS } from "../../../core/data/dashboard/dashboard-menu-items";
+import { useProfileInfo } from "../../../core/services/api/user-panel/useProfileInfo";
+import { removeItem } from "../../../core/services/common/storage.services";
+import { showInfoToast } from "../../../core/utils/toast.utils";
+
 import { DarkModeButton } from "../../common/DarkModeButton";
 
+import blankThumbnail from "../../../assets/images/Courses/blank-thumbnail.jpg";
 import dashboardLogo from "../../../assets/images/Dashboard/Icons/dashboard-logo.svg";
 import notificationIcon from "../../../assets/images/Dashboard/Icons/notification.svg";
-import blankThumbnail from "../../../assets/images/Courses/blank-thumbnail.jpg";
 
 const DashboardSidebar = () => {
   const { pathname } = useLocation();
@@ -24,7 +23,8 @@ const DashboardSidebar = () => {
   const onLogout = () => {
     removeItem("token");
     dispatch(isUserLoginChange(false));
-    toast.info("شما از سایت خارج شدید ...");
+
+    showInfoToast("شما از سایت خارج شدید ...");
     window.location.pathname = "/";
   };
 

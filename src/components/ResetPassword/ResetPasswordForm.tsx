@@ -1,10 +1,8 @@
 import { Form, Formik } from "formik";
-import { useNavigate } from "react-router-dom";
 
+import { useResetPassword } from "../../core/services/api/auth/forget-password/useResetPassword";
 import { forgetPasswordStepTwoFormSchema } from "../../core/validations/forget-password/forget-password-step-two-form";
-import { resetPasswordAPI } from "../../core/services/api/auth/forget-password/reset-password.api";
 
-import { toast } from "react-toastify";
 import { FieldBox } from "../common/FieldBox";
 
 interface ResetPasswordFormProps {
@@ -13,30 +11,18 @@ interface ResetPasswordFormProps {
 }
 
 const ResetPasswordForm = ({ configValue, userId }: ResetPasswordFormProps) => {
-  const navigate = useNavigate();
+  const resetPassword = useResetPassword();
 
   const onSubmit = async (values: { newPassword: string }) => {
-    try {
-      if (configValue) {
-        const resetConfirmValue = await toast.promise(
-          resetPasswordAPI(userId, values.newPassword, configValue),
-          {
-            pending: "در حال بازگردانی رمز عبور ...",
-          }
-        );
+    if (configValue) {
+      const { newPassword } = values;
 
-        if (resetConfirmValue.success) {
-          toast.success(resetConfirmValue.message);
-          navigate("/login");
-          toast.info("اکنون میتوانید وارد سایت شوید ...");
-        } else {
-          toast.error(resetConfirmValue.message);
-        }
-      }
-    } catch (error) {
-      toast.error("مشکلی در فرایند بازگردانی رمز عبور پیش آمد ...");
+      resetPassword.mutate({
+        newPassword,
+        resetValue: configValue,
+        userId,
+      });
     }
-    console.log(values);
   };
 
   return (
@@ -56,6 +42,7 @@ const ResetPasswordForm = ({ configValue, userId }: ResetPasswordFormProps) => {
               placeholder="رمز عبور جدید"
               className="authInput"
               isPassword
+              errorMessageWrapperMargin={false}
             />
             <div className="forgetPasswordStepTwoSubmitButtonWrapper">
               <button type="button" className="mainButton rounded-md">

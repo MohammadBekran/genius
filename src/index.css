@@ -14,6 +14,9 @@
   body {
     @apply bg-[#FAFBFC];
   }
+  ::selection {
+    @apply bg-primary text-white;
+  }
 }
 
 @layer components {
@@ -227,10 +230,10 @@
     @apply w-[50px] h-[50px] outline-none px-5 rounded-[16px] border dark:bg-darkBackground dark:border-darkBorder;
   }
   .authSendVerificationCodeTime {
-    @apply font-[500] text-[24px] text-primaryColor flex justify-center my-4;
+    @apply font-[500] text-[24px] text-primaryColor flex justify-center mt-3;
   }
   .authPageWrapper {
-    @apply flex flex-col lg:flex-row lg:w-[82%] mx-auto shadow-primaryShadow rounded-md overflow-hidden px-4 lg:px-0;
+    @apply flex flex-col lg:flex-row lg:w-[1109px] mx-auto shadow-primaryShadow rounded-md overflow-hidden px-4 lg:px-0;
   }
   .authPageSidebar {
     @apply bg-[#191b23] lg:w-[37%] lg:h-[520px] pt-14 pb-4 flex flex-col justify-between items-center rounded-t-md;
@@ -260,13 +263,13 @@
     @apply mainButton w-[200px] h-[50px] rounded-md;
   }
   .registerStepTwoPhoneNumberInputWrapper {
-    @apply flex flex-col items-center gap-4 mt-5;
+    @apply flex flex-col items-center mt-5;
   }
   .registerStepThreeWrapper {
     @apply w-full flex justify-center;
   }
   .registerStepTwoThreeSubmitButtonWrapper {
-    @apply flex gap-3 justify-center items-center mt-7;
+    @apply flex gap-3 justify-center items-center mt-[0.75rem];
   }
   .registerStepThreeFieldsWrapper {
     @apply flex flex-col w-full gap-3;

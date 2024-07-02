@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { resetConfirmValueAPI } from "../../core/services/api/auth/forget-password/reset-confirm-value.api";
+import { useResetConfirmValue } from "../../core/services/api/auth/forget-password/useResetConfirmValue";
 
 import { Logo } from "../Layout/Header/Logo";
 import { AuthHeading } from "../common/AuthHeading";
@@ -9,19 +8,9 @@ import { SocialMedia } from "../common/SocialMedia";
 import { ResetPasswordForm } from "./ResetPasswordForm";
 
 const ResetPassword = () => {
-  const [userId, setUserId] = useState<number>();
-
   const { configValue } = useParams();
 
-  useEffect(() => {
-    const fetchConfigValue = async () => {
-      const response = await resetConfirmValueAPI(configValue!);
-
-      setUserId(response.id);
-    };
-
-    if (configValue) fetchConfigValue();
-  }, []);
+  const { data: resetConfirmValue } = useResetConfirmValue(configValue!);
 
   return (
     <div className="authPageWrapper">
@@ -39,7 +28,10 @@ const ResetPassword = () => {
             title="بازگردانی رمز عبور"
             description="لطفا ایمیل خود را وارد نمایید."
           />
-          <ResetPasswordForm configValue={configValue} userId={userId!} />
+          <ResetPasswordForm
+            configValue={configValue}
+            userId={resetConfirmValue.id}
+          />
         </div>
       </div>
     </div>

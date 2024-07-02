@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { typeWriterOptions } from "../../core/data/typewriter-options";
-
 import { useDarkModeSelector } from "../../redux/darkMode";
 
-import useCourses from "../../hooks/course/useCourses";
-import { useLandingReport } from "../../hooks/landing/useLandingReport";
+import { typeWriterOptions } from "../../core/data/typewriter-options";
+import { useCourses } from "../../core/services/api/course/useCourses";
+import { useLandingReport } from "../../core/services/api/landing/useLandingReport";
 
 import { CourseInterface } from "../../types/course";
 

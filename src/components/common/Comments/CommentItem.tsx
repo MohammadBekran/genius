@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  RiDiscLine,
   RiDislikeFill,
   RiDislikeLine,
   RiHeart3Fill,
@@ -8,15 +7,15 @@ import {
 } from "react-icons/ri";
 import { useParams } from "react-router-dom";
 
-import { useAddReplyCourseComment } from "../../../hooks/course/comments/useAddReplyCourseComment";
-import { useCourseCommentLike } from "../../../hooks/course/comments/useCourseCommentLike";
-import { useCourseReplyComments } from "../../../hooks/course/comments/useCourseReplyComments";
-import { useDeleteCourseCommentLike } from "../../../hooks/course/comments/useDeleteCourseCommentLike";
-import { useAddNewsReplyComment } from "../../../hooks/news/comments/useAddNewsReplyComment";
-import { useCommentLike } from "../../../hooks/news/comments/useCommentLike";
-import { useDeleteCommentLikeNews } from "../../../hooks/news/comments/useDeleteCommentLikeNews";
-import { useNewsReplyComments } from "../../../hooks/news/comments/useNewsReplyComments";
-
+import { useAddReplyCourseComment } from "../../../core/services/api/course/comments/useAddReplyCourseComment";
+import { useCourseCommentDislike } from "../../../core/services/api/course/comments/useCourseCommentDislike";
+import { useCourseCommentLike } from "../../../core/services/api/course/comments/useCourseCommentLike";
+import { useCourseReplyComments } from "../../../core/services/api/course/comments/useCourseReplyComments";
+import { useDeleteCourseCommentLike } from "../../../core/services/api/course/comments/useDeleteCourseCommentLike";
+import { useAddNewsReplyComment } from "../../../core/services/api/news/comments/useAddNewsReplyComment";
+import { useCommentLike } from "../../../core/services/api/news/comments/useCommentLike";
+import { useDeleteCommentLikeNews } from "../../../core/services/api/news/comments/useDeleteCommentLikeNews";
+import { useNewsReplyComments } from "../../../core/services/api/news/comments/useNewsReplyComments";
 import { convertDateToPersian } from "../../../core/utils/date-helper.utils";
 import { onFormData } from "../../../core/utils/form-data-helper.utils";
 import { commentFormSchema } from "../../../core/validations/comment-form.validation";
@@ -29,7 +28,6 @@ import CommentSkeleton from "../CommentSkeleton";
 import blankThumbnail from "../../../assets/images/Courses/blank-thumbnail.jpg";
 import messagesDarkIcon from "../../../assets/images/common/Comments/Icons/messages-dark.svg";
 import messagesIcon from "../../../assets/images/common/Comments/Icons/messages.svg";
-import { useCourseCommentDislike } from "../../../hooks/course/comments/useCourseCommentDislike";
 
 interface CommentItemProps {
   avatarImage: string | null;

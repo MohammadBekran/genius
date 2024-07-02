@@ -1,16 +1,15 @@
 import { Delete, RemoveRedEye } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 
+import { useDeleteCourseReserve } from "../../core/services/api/course/course-reserve/useDeleteCourseReserve";
+import { useCourseDetails } from "../../core/services/api/course/useCourseDetails";
 import { convertDateToPersian } from "../../core/utils/date-helper.utils";
-import { useDeleteCourseReserve } from "../../hooks/course/course-reserve/useDeleteCourseReserve";
-import { useCourseDetails } from "../../hooks/course/useCourseDetails";
 
 import { CourseReserves } from "../../types/user-panel/course-reserves";
 
 import { Link } from "../common/Link";
 
 import blankThumbnail from "../../assets/images/Courses/blank-thumbnail.jpg";
-import { useEffect } from "react";
 
 interface DashboardCourseReserveItemProps {
   courseReserve: CourseReserves;

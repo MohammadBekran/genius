@@ -1,10 +1,10 @@
-import { toast } from "react-toastify";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
 
-import { useTeachers } from "../../../hooks/teacher/useTeachers";
+import { useTeachers } from "../../../core/services/api/teacher/useTeachers";
+import { showErrorToast } from "../../../core/utils/toast.utils";
 
 import { TeacherItem } from "./TeacherItem";
 import { TeacherSkeleton } from "./TeacherSkeleton";
@@ -17,7 +17,7 @@ import "swiper/css/pagination";
 const TeachersSlider = () => {
   const { data, isLoading, error } = useTeachers();
 
-  if (error) toast.error("مشکلی در دریافت اساتید به وجود آمد !");
+  if (error) showErrorToast("مشکلی در دریافت اساتید به وجود آمد !");
 
   const teachersSkeleton = [1, 2, 3, 4, 5];
 

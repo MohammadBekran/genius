@@ -25,6 +25,7 @@ const FieldBox = ({
   dateValue,
   options,
   render,
+  errorMessageWrapperMargin = true,
 }: FieldBoxProps) => {
   const datePickerOnChange = (e: any) => {
     const date = e.day + "/" + e.month + "/" + e.year;
@@ -87,7 +88,10 @@ const FieldBox = ({
               </div>
             </div>
           )}
-          <ErrorMessage name={name} />
+          <ErrorMessage
+            name={name}
+            errorMessageWrapperMargin={errorMessageWrapperMargin}
+          />
         </>
       )}
       {isCheckbox && (
@@ -98,7 +102,10 @@ const FieldBox = ({
               {label}
             </label>
           </div>
-          <ErrorMessage name={name} />
+          <ErrorMessage
+            name={name}
+            errorMessageWrapperMargin={errorMessageWrapperMargin}
+          />
         </>
       )}
     </div>

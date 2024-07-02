@@ -12,8 +12,18 @@ const showSuccessToast = (message: string) => {
   toast.success(message);
 };
 
+const showInfoToast = (message: string) => {
+  toast.info(message);
+};
+
 const showErrorToast = (message: string) => {
   toast.error(message);
 };
 
-export { showLoadingToast, dismissToast, showSuccessToast, showErrorToast };
+export {
+  dismissToast,
+  showErrorToast,
+  showInfoToast,
+  showLoadingToast,
+  showSuccessToast,
+};

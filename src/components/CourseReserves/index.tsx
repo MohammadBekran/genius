@@ -1,4 +1,4 @@
-import { useMyReserveCourses } from "../../hooks/user-panel/useMyReserveCourses";
+import { useMyReserveCourses } from "../../core/services/api/user-panel/useMyReserveCourses";
 
 import { DashboardTitleBox } from "../common/DashboardTitleBox";
 import { DashboardCourseReservesCourse } from "./DashboardCourseReservesCourse";

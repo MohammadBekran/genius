@@ -1,7 +1,7 @@
-import { FormControlLabel } from "../FormControlLabel";
 import { Checkbox } from "../CheckBox";
-import { Radio } from "../Radio";
+import { FormControlLabel } from "../FormControlLabel";
 import { FormGroup } from "../FormGroup";
+import { Radio } from "../Radio";
 
 import checkboxIcon from "../../../assets/images/Courses/Filter/checkbox.svg";
 import checkedIcon from "../../../assets/images/Courses/Filter/checked.png";
@@ -23,7 +23,6 @@ const FilterCheckbox = ({
   value,
   onChange,
 }: FilterCheckboxProps) => {
-  console.log("v", value);
   return (
     <div className={className}>
       <FormGroup>
