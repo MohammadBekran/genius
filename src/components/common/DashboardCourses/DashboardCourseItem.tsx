@@ -1,4 +1,5 @@
 import { RemoveRedEye } from "@mui/icons-material";
+import { useState } from "react";
 
 import { convertDateToPersian } from "../../../core/utils/date-helper.utils";
 
@@ -23,12 +24,15 @@ const DashboardCourseItem = ({
   lastUpdate,
   formattedPrice,
 }: DashboardCourseItemProps) => {
+  const [courseImageSrc, setCourseImageSrc] = useState(tumbImageAddress);
+
   const convertedUpdateDate = convertDateToPersian(lastUpdate);
 
   return (
     <div key={courseId} className="dashboardCourseItem">
       <img
-        src={tumbImageAddress || blankThumbnail}
+        src={courseImageSrc}
+        onError={() => setCourseImageSrc(blankThumbnail)}
         className="dashboardCourseItemImage"
       />
       <Link to={`/courses/${courseId}`} className="dashboardCourseTitleLink">

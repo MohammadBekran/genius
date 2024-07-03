@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 import { convertDateToPersian } from "../../../core/utils/date-helper.utils";
+import { handleShowImage } from "../../../core/utils/show-image-helper.utils";
+
 import { NewsInterface } from "../../../types/news";
 
 import { Link } from "../../common/Link";
@@ -14,12 +16,7 @@ interface NewsItemProps {
 
 const NewsItem = ({ news }: NewsItemProps) => {
   const [newsImageSrc, setNewsImageSrc] = useState(
-    news.currentImageAddressTumb &&
-      news.currentImageAddressTumb !== "<string>" &&
-      news.currentImageAddressTumb !== "undefined" &&
-      news.currentImageAddressTumb !== "Not-set"
-      ? news.currentImageAddressTumb
-      : blankThumbnail
+    handleShowImage(news.currentImageAddressTumb)
   );
 
   const formattedUpdateDate = convertDateToPersian(news.updateDate);

@@ -1,7 +1,9 @@
+import { useState } from "react";
 import Tilt from "react-parallax-tilt";
 
 import { convertDateToPersian } from "../../../core/utils/date-helper.utils";
 import { priceWithCommas } from "../../../core/utils/number-helper.utils";
+import { handleShowImage } from "../../../core/utils/show-image-helper.utils";
 
 import { CourseInterface } from "../../../types/course";
 
@@ -23,6 +25,10 @@ interface CourseItemProps {
 }
 
 const CourseItem = ({ course }: CourseItemProps) => {
+  const [courseImageSrc, setCourseImageSrc] = useState(
+    handleShowImage(course.tumbImageAddress)
+  );
+
   const darkMode = useDarkModeSelector();
   const formattedPrice = priceWithCommas(+course.cost);
   const formattedDate = convertDateToPersian(course.lastUpdate);
@@ -32,16 +38,8 @@ const CourseItem = ({ course }: CourseItemProps) => {
       <div className={`courseItemS2 pt-[2px]`}>
         <Link to={`/courses/${course.courseId}`}>
           <img
-            src={
-              course.tumbImageAddress == undefined ||
-              course.tumbImageAddress === "Not-set" ||
-              course.tumbImageAddress === "not-set" ||
-              course.tumbImageAddress === "undefined" ||
-              course.tumbImageAddress === "<string>" ||
-              !course.tumbImageAddress
-                ? blankThumbnail
-                : course.tumbImageAddress
-            }
+            src={courseImageSrc}
+            onError={() => setCourseImageSrc(blankThumbnail)}
             className="courseItemImage"
           />
         </Link>

@@ -1,5 +1,6 @@
 import { Delete } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
+import { useState } from "react";
 
 import { useDarkModeSelector } from "../../../redux/darkMode";
 
@@ -9,6 +10,7 @@ import { Link } from "../Link";
 
 import teacherDarkIcon from "../../../assets/images/CourseDetails/Icons/teacher-dark.svg";
 import teacherIcon from "../../../assets/images/CourseDetails/Icons/teacher.svg";
+import blankThumbnail from "../../../assets/images/Courses/blank-thumbnail.jpg";
 
 interface DashboardMobileCourseItemProps {
   image: string;
@@ -31,6 +33,8 @@ const DashboardMobileCourseItem = ({
   isCourseReserveAccepted,
   courseReserveId,
 }: DashboardMobileCourseItemProps) => {
+  const [courseImageSrc, setCourseImageSrc] = useState(image);
+
   const darkMode = useDarkModeSelector();
   const deleteCourseReserve = useDeleteCourseReserve();
 
@@ -41,7 +45,11 @@ const DashboardMobileCourseItem = ({
   return (
     <div className="dashboardMobileCourseItem">
       <div>
-        <img src={image} className="dashboardMobileCourseItemImage" />
+        <img
+          src={courseImageSrc}
+          onError={() => setCourseImageSrc(blankThumbnail)}
+          className="dashboardMobileCourseItemImage"
+        />
       </div>
       <div>
         <Link to={`/courses/${id}`}>

@@ -54,9 +54,7 @@ const PaginatedNews = ({
           </div>
         )}
       </div>
-      {pageCount > 1 && (
-        <Pagination handlePageClick={handlePageClick} pageCount={pageCount} />
-      )}
+      <Pagination handlePageClick={handlePageClick} pageCount={pageCount} />
     </div>
   );
 };

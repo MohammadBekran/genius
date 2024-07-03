@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useCourses } from "../../core/services/api/course/useCourses";
 import { showErrorToast } from "../../core/utils/toast.utils";
 
-import { DashboardAllCourses } from "../common/DashboardCourses/DashboardAllCourses";
+import { PaginatedDashboardAllCourses } from "../common/DashboardCourses/PaginatedDashboardAllCourses";
 import { DashboardCoursesSearchFilterBox } from "../common/DashboardCoursesSearchFilterBox";
 import { DashboardTitleBox } from "../common/DashboardTitleBox";
 
@@ -30,7 +30,7 @@ const AllCourses = () => {
         setCoursesPerPage={setRowsOfPage}
         setQuery={setQuery}
       />
-      <DashboardAllCourses
+      <PaginatedDashboardAllCourses
         courses={data?.courseFilterDtos || []}
         totalCount={data?.totalCount || 0}
         isLoading={isLoading}
