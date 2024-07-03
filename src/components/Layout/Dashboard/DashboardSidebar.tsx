@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { isUserLoginChange } from "../../../redux/user-login";
 
@@ -9,6 +9,7 @@ import { removeItem } from "../../../core/services/common/storage.services";
 import { showInfoToast } from "../../../core/utils/toast.utils";
 
 import { DarkModeButton } from "../../common/DarkModeButton";
+import { Link } from "../../common/Link";
 
 import blankThumbnail from "../../../assets/images/Courses/blank-thumbnail.jpg";
 import dashboardLogo from "../../../assets/images/Dashboard/Icons/dashboard-logo.svg";

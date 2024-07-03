@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { convertDateToPersian } from "../../../core/utils/date-helper.utils";
 import { NewsInterface } from "../../../types/news";
 
@@ -11,20 +13,23 @@ interface NewsItemProps {
 }
 
 const NewsItem = ({ news }: NewsItemProps) => {
+  const [newsImageSrc, setNewsImageSrc] = useState(
+    news.currentImageAddressTumb &&
+      news.currentImageAddressTumb !== "<string>" &&
+      news.currentImageAddressTumb !== "undefined" &&
+      news.currentImageAddressTumb !== "Not-set"
+      ? news.currentImageAddressTumb
+      : blankThumbnail
+  );
+
   const formattedUpdateDate = convertDateToPersian(news.updateDate);
 
   return (
     <div className="lg:w-[400px]">
       <Link to={`/news/${news.id}`}>
         <img
-          src={
-            news.currentImageAddressTumb &&
-            news.currentImageAddressTumb !== "<string>" &&
-            news.currentImageAddressTumb !== "undefined" &&
-            news.currentImageAddressTumb !== "Not-set"
-              ? news.currentImageAddressTumb
-              : blankThumbnail
-          }
+          src={newsImageSrc}
+          onError={(e) => setNewsImageSrc(blankThumbnail)}
           className="w-[400px] h-[240px] object-fit rounded-md"
         />
         <h4 className="font-[700] text-[20px] text-text1 dark:text-darkText mt-5 truncate">

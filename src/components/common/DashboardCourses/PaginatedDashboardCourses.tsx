@@ -54,7 +54,9 @@ const PaginatedDashboardCourses = ({
             );
           })}
       </div>
-      <Pagination handlePageClick={handlePageClick} pageCount={pageCount} />
+      {pageCount > 1 && (
+        <Pagination handlePageClick={handlePageClick} pageCount={pageCount} />
+      )}
     </div>
   );
 };

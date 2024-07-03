@@ -50,25 +50,17 @@ const CourseItem = ({ course }: CourseItemProps) => {
         </h4>
         <div className="bg-[#ECEFF1] dark:bg-darkBackground rounded-[24px] flex justify-between items-center mt-5 h-[40px] px-3">
           <div className="courseItemDetailsBox">
-            {darkMode === true ? (
-              <img src={noteDarkIcon} />
-            ) : (
-              <img src={noteIcon} />
-            )}
+            {darkMode ? <img src={noteDarkIcon} /> : <img src={noteIcon} />}
             <span className="courseItemDetailsBoxText">
               {course.commandCount} درس
             </span>
           </div>
           <div className="courseItemDetailsBox">
-            {darkMode === true ? (
-              <img src={clockDarkIcon} />
-            ) : (
-              <img src={clockIcon} />
-            )}
+            {darkMode ? <img src={clockDarkIcon} /> : <img src={clockIcon} />}
             <span className="courseItemDetailsBoxText">20 ساعت</span>
           </div>
           <div className="courseItemDetailsBox">
-            {darkMode === true ? (
+            {darkMode ? (
               <img src={calenderDarkIcon} />
             ) : (
               <img src={calenderIcon} />

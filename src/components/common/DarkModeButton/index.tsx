@@ -26,10 +26,10 @@ const DarkModeButton = ({ isDashboard }: DarkModeButtonProps) => {
     <button
       onClick={handleDarkModeChange}
       className={`w-[48px] h-[48px]  dark:bg-gray-800 rounded-full outline-none ${
-        darkMode === true ? "" : ""
-      } ${isDashboard ? "!bg-dashboardDarkMode mt-4" : "bg-white"}`}
+        isDashboard ? "!bg-dashboardDarkMode mt-4" : "bg-white"
+      }`}
     >
-      {darkMode === true ? (
+      {darkMode ? (
         <DarkMode />
       ) : (
         <LightMode

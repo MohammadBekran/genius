@@ -1,6 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
-import { DeleteFilterState } from "../../../common/DeleteFilterState";
 import { FilterCheckbox } from "../../../common/FilterCheckbox";
 import { RadioGroup } from "../../../common/RadioGroup";
 import { FilterAccordion } from "../FilterAccordion";
@@ -24,10 +23,6 @@ const SortTypeFilter = ({ setSortType }: SortTypeFilterProps) => {
 
   return (
     <FilterAccordion title="مرتب ساری">
-      <DeleteFilterState
-        handleDeleteValueChange={handleDeleteValueChange}
-        isValueChanged={isSortValueChanged}
-      />
       <RadioGroup name="sortTypeGroup">
         <FilterCheckbox
           type="radio"

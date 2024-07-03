@@ -7,7 +7,6 @@ import registerSlice from "./register";
 import isUserLoginSlice from "./user-login";
 import userProfileSlice from "./user-profile";
 import userProfileImageSlice from "./user-profile-image";
-import isTwoStepAuthSlice from "./isTwoStepAuth";
 
 // Dark Mode Slice
 const darkModePersistConfig = {
@@ -53,17 +52,6 @@ const userProfileImagePersistedReducer = persistReducer(
   userProfileImageSlice
 );
 
-// Is Two Step Auth Slice
-const isTwoStepAuthPersistedConfig = {
-  key: "root",
-  storage,
-};
-
-const isTwoStepAuthPersistedReducer = persistReducer(
-  isTwoStepAuthPersistedConfig,
-  isTwoStepAuthSlice
-);
-
 export const store = configureStore({
   reducer: {
     darkMode: darkModePersistedReducer,
@@ -71,7 +59,6 @@ export const store = configureStore({
     isUserLogin: isUserLoginPersistedReducer,
     userProfile: userProfilePersistedReducer,
     userProfileImage: userProfileImagePersistedReducer,
-    isTwoStepAuth: isTwoStepAuthPersistedReducer,
   },
 });
 

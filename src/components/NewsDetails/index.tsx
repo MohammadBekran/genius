@@ -65,7 +65,7 @@ const NewsDetails = () => {
   };
 
   return (
-    <div className="w-[83%] mx-auto">
+    <div className="w-[83%] lg:w-[1119px] mx-auto">
       <NewsHeroSection
         news={data?.detailsNewsDto!}
         isLoading={isLoading}

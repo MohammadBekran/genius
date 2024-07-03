@@ -2,7 +2,6 @@ import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 import { useCourseTypes } from "../../../../core/services/api/course/useCourseTypes";
 
-import { DeleteFilterState } from "../../../common/DeleteFilterState";
 import { FilterCheckbox } from "../../../common/FilterCheckbox";
 import { RadioGroup } from "../../../common/RadioGroup";
 import { FilterAccordion } from "../FilterAccordion";
@@ -28,10 +27,6 @@ const TypesFilter = ({ setCourseTypeId }: TypesFilterProps) => {
 
   return (
     <FilterAccordion title="تایپ دوره">
-      <DeleteFilterState
-        handleDeleteValueChange={handleDeleteValueChange}
-        isValueChanged={isValueChanged}
-      />
       <RadioGroup name="courseTypesGroup">
         {courseTypes &&
           courseTypes.map((type) => (

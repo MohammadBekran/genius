@@ -2,7 +2,6 @@ import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 import { useTeachers } from "../../../../core/services/api/teacher/useTeachers";
 
-import { DeleteFilterState } from "../../../common/DeleteFilterState";
 import { FilterCheckbox } from "../../../common/FilterCheckbox";
 import { RadioGroup } from "../../../common/RadioGroup";
 import { SearchBox } from "../../../common/SearchBox";
@@ -40,10 +39,6 @@ const TeacherFilter = ({ setTeacherId, setQuery }: TeacherFilterProps) => {
 
   return (
     <FilterAccordion title="اساتید دوره" isOpen>
-      <DeleteFilterState
-        handleDeleteValueChange={handleDeleteValueChange}
-        isValueChanged={isValueChanged}
-      />
       <div className="w-[96%] pr-5 mb-5">
         <SearchBox
           placeholder="جستجوی استاد"

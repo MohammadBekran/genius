@@ -1,21 +1,15 @@
-import { Link } from "react-router-dom";
-
 import { useIsUserLogin } from "../../../redux/user-login";
+
+import { Link } from "../../common/Link";
 
 const LoginButton = () => {
   const isLoggedIn = useIsUserLogin();
 
   return (
     <div>
-      {isLoggedIn ? (
-        <Link to="/dashboard" className="loginButton">
-          حساب کاربری
-        </Link>
-      ) : (
-        <Link to="/login" className="loginButton">
-          ورود به حساب
-        </Link>
-      )}
+      <Link to={isLoggedIn ? "/dashboard" : "/login"} className="loginButton">
+        {isLoggedIn ? "حساب کاربری" : " ورود به حساب"}
+      </Link>
     </div>
   );
 };

@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import { useDarkModeSelector } from "../../redux/darkMode";
 
 import { priceWithCommas } from "../../core/utils/number-helper.utils";
 
+import { Link } from "../common/Link";
 import { Skeleton } from "../common/Skeleton";
 
-import blankThumbnail from "../../assets/images/Courses/blank-thumbnail.jpg";
-import teacherIcon from "../../assets/images/Courses/Icons/teacher.svg";
 import teacherDarkIcon from "../../assets/images/Courses/Icons/teacher-dark.svg";
-import { useState } from "react";
+import teacherIcon from "../../assets/images/Courses/Icons/teacher.svg";
+import blankThumbnail from "../../assets/images/Courses/blank-thumbnail.jpg";
 
 interface DashboardCourseItemProps {
   id: string;

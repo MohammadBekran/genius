@@ -63,7 +63,7 @@
     @apply courseItem w-full lg:w-[296px] mt-0 dark:bg-gray-900;
   }
   .courseItemImage {
-    @apply w-[350px] lg:w-auto lg:h-[180px] max-h-[220px] lg:max-h-max object-cover rounded-[20px] mt-[16px] cursor-pointer;
+    @apply w-[350px] min-w-full lg:w-auto lg:h-[180px] max-h-[220px] lg:max-h-max object-cover rounded-[20px] mt-[16px] cursor-pointer;
   }
   .courseItemDetailsBox {
     @apply flex gap-[3px];
@@ -132,7 +132,7 @@
     @apply w-full h-[50px] pr-10 rounded-[16px] outline-none appearance-none dark:bg-gray-900;
   }
   .courseLikeBox {
-    @apply flex justify-center items-center bg-[#FFEBEE] dark:bg-gray-800 dark:text-darkText cursor-pointer rounded-[24px] w-[35px] h-[32px] font-[500] text-red gap-1 -mt-1;
+    @apply flex justify-center gap-1 items-center bg-[#FFEBEE] dark:bg-gray-800 text-red font-[500] cursor-pointer rounded-[24px] w-[35px] h-[32px]  -mt-1;
   }
   .courseItemStyleTwo {
     @apply w-full bg-white dark:bg-gray-900 shadow-primaryShadow rounded-[24px] lg:h-[212px] px-3 py-2 flex flex-col lg:flex-row justify-center items-center gap-3;
@@ -378,7 +378,7 @@
     @apply mr-4 pr-2 list-image-[url('/src/assets/images/NewsDetails/Icons/list-item-dot.svg')];
   }
   .newsDetailsCommentsSection {
-    @apply bg-white dark:bg-gray-900 shadow-primaryShadow rounded-[24px] mt-12 px-8 py-6 w-[410px] lg:w-full;
+    @apply bg-white dark:bg-gray-900 shadow-primaryShadow rounded-[24px] mt-12 px-8 py-6 w-full;
   }
   .newsDetailsCommentsText {
     @apply font-[700] text-[24px] text-text1 dark:text-darkText text-center mb-6;
@@ -415,7 +415,7 @@
     @apply absolute -top-1 right-0 w-[16px] h-[16px] rounded-full bg-white flex justify-center items-center text-[13px] text-center pt-[4px];
   }
   .dashboardLeftSide {
-    @apply lg:w-[80%] lg:mr-[320px] px-7 py-5;
+    @apply lg:w-[1200px] mx-auto lg:mr-[320px] px-7 py-5;
   }
   .dashboardDivider {
     @apply w-full h-[1px] bg-blue-400 mt-7;

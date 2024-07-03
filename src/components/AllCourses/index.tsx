@@ -32,10 +32,10 @@ const AllCourses = () => {
       />
       <DashboardAllCourses
         courses={data?.courseFilterDtos || []}
-        rowsOfPage={rowsOfPage}
-        setCurrentPage={setCurrentPage}
         totalCount={data?.totalCount || 0}
         isLoading={isLoading}
+        rowsOfPage={rowsOfPage}
+        setCurrentPage={setCurrentPage}
       />
     </div>
   );

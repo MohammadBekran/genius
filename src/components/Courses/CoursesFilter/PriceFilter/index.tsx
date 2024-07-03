@@ -1,9 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react";
 
+import { priceWithCommas } from "../../../../core/utils/number-helper.utils";
 import { RageInput } from "../../../common/RangeInput";
 import { FilterAccordion } from "../FilterAccordion";
-import { DeleteFilterState } from "../../../common/DeleteFilterState";
-import { priceWithCommas } from "../../../../core/utils/number-helper.utils";
 
 interface PriceFilterProps {
   setCostDown: Dispatch<SetStateAction<number | undefined>>;
@@ -27,12 +26,6 @@ const PriceFilter = ({ setCostDown, setCostUp }: PriceFilterProps) => {
 
   return (
     <FilterAccordion title="قیمت" isOpen>
-      {isValueChanged && (
-        <DeleteFilterState
-          handleDeleteValueChange={handleDeleteValueChange}
-          isValueChanged={isValueChanged}
-        />
-      )}
       <div className="flex justify-between px-5">
         <span className="filterRangeText">
           از {formattedPriceValue[0]} تومان

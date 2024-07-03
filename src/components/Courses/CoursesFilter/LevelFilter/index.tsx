@@ -2,7 +2,6 @@ import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 import { useCourseLevel } from "../../../../core/services/api/course/useCourseLevel";
 
-import { DeleteFilterState } from "../../../common/DeleteFilterState";
 import { FilterCheckbox } from "../../../common/FilterCheckbox";
 import { RadioGroup } from "../../../common/RadioGroup";
 import { FilterAccordion } from "../FilterAccordion";
@@ -28,10 +27,6 @@ const LevelFilter = ({ setCourseLevel }: LevelFilterProps) => {
 
   return (
     <FilterAccordion title="سطح دوره" isOpen>
-      <DeleteFilterState
-        handleDeleteValueChange={handleDeleteValueChange}
-        isValueChanged={isValueChanged}
-      />
       <RadioGroup name="courseLevelGroup">
         {courseLevels &&
           courseLevels?.map((level) => (

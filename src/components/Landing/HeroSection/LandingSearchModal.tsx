@@ -4,10 +4,10 @@ import DialogContent from "@mui/material/DialogContent";
 import Slide, { SlideProps } from "@mui/material/Slide";
 import { Dispatch, SetStateAction, forwardRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Link } from "react-router-dom";
 
 import { CourseInterface } from "../../../types/course";
 
+import { Link } from "../../common/Link";
 import { SearchBox } from "../../common/SearchBox";
 
 import blankThumbnail from "../../../assets/images/Courses/blank-thumbnail.jpg";

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { showErrorToast } from "../../../utils/toast.utils";
+import { showErrorToast, showSuccessToast } from "../../../utils/toast.utils";
 import http from "../../interceptor";
 
 export const useDeleteCourseLike = () => {
@@ -16,6 +16,8 @@ export const useDeleteCourseLike = () => {
         })
         .then((res) => res.data),
     onSuccess: () => {
+      showSuccessToast("لایک شما با موفقیت حذف شد !");
+
       queryClient.invalidateQueries({
         queryKey: ["courseDetails"],
       });

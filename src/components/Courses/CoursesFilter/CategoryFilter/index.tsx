@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 import { useTechnologies } from "../../../../core/services/api/course/useTechnologies";
 
-import { DeleteFilterState } from "../../../common/DeleteFilterState";
 import { FilterCheckbox } from "../../../common/FilterCheckbox";
 import { FilterAccordion } from "../FilterAccordion";
 
@@ -35,10 +34,6 @@ const CategoryFilter = ({ setListTechState }: CategoryFilterProps) => {
 
   return (
     <FilterAccordion title="دسته بندی‌ ها">
-      <DeleteFilterState
-        handleDeleteValueChange={handleDeleteValueChange}
-        isValueChanged={isValueChanged}
-      />
       {technologies &&
         technologies?.map((technology) => (
           <FilterCheckbox
